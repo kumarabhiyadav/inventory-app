@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:inventory_app/colors.dart';
-import 'package:inventory_app/commonWidgets/app_bar.dart';
-import 'package:inventory_app/commonWidgets/name_tile.dart';
-import 'package:inventory_app/productModule/screens/product_screen.dart';
 
+import 'package:inventory_app/commonWidgets/app_bar.dart';
+import '../InventoryModule/screens/product_screens.dart';
 import '../commonWidgets/options.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: const CustomAppBar(
-        leading: null,
+        leading: SizedBox.shrink(),
         title: 'S. S Fashion',
       ),
       body: Container(
@@ -55,8 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Options(
               function: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProductScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CategoryScreen()));
               },
               size: size,
               icon: 'assets/svgs/inventory.svg',

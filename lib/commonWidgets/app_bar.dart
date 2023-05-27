@@ -21,27 +21,28 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           elevation: 0,
           centerTitle: true,
           leadingWidth: size.width * 0.2,
-          leading: Material(
-            child: InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              splashColor: Colors.purple,
-              child: Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.05,
-                      vertical: size.width * 0.02),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.black12,
-                  ),
-                  child: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 18,
-                  )),
-            ),
-          ),
+          leading: leading ??
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  splashColor: Colors.purple.withOpacity(.3),
+                  child: Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.05,
+                          vertical: size.width * 0.02),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.black12,
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: Theme.of(context).primaryColor,
+                        size: 18,
+                      )),
+                ),
+              ),
           title: Text(
             title,
             style: TextStyle(
