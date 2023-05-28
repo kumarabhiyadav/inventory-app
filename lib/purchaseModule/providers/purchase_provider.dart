@@ -10,8 +10,21 @@ class PurchaseProvider with ChangeNotifier {
           PurchaseSubproduct(
               cost: 100.00,
               quantity: 10.0,
-              subProduct: SubProductModel(id: "1", name: "Lace"))
+              subProduct: SubProductModel(id: "1", name: "Lace")),
+          PurchaseSubproduct(
+              cost: 100.00,
+              quantity: 10.0,
+              subProduct: SubProductModel(id: "1", name: "Lace")),
+          PurchaseSubproduct(
+              cost: 100.00,
+              quantity: 10.0,
+              subProduct: SubProductModel(id: "1", name: "Lace")),
+          PurchaseSubproduct(
+              cost: 100.00,
+              quantity: 10.0,
+              subProduct: SubProductModel(id: "1", name: "Lace")),
         ],
-        supplier: SupplierModel(address: "Thane West", name: "Ramdev"))
+        supplier: SupplierModel(address: "Thane West", name: "Ramdev"),
+        date: DateTime.now())
   ];
 }

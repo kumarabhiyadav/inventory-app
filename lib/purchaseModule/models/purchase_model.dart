@@ -12,11 +12,13 @@ class PurchaseModel {
   double additionalCost;
   List<PurchaseSubproduct> subproducts;
   SupplierModel supplier;
+  DateTime date;
 
   PurchaseModel(
       {required this.additionalCost,
       required this.subproducts,
-      required this.supplier});
+      required this.supplier,
+      required this.date});
 }
 
 class SupplierModel {
