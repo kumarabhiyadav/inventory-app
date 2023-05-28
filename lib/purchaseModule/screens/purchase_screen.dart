@@ -38,74 +38,64 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                   ],
                 ),
                 const Divider(),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: dW * 0.22,
-                      child: const Text(
-                        'Name',
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(
-                      width: dW * 0.21,
-                      child: const Text(
-                        'Quantity',
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(
-                      width: dW * 0.22,
-                      child: const Text(
-                        'Rate',
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(
-                      width: dW * 0.2,
-                      child: const Text(
-                        'Total',
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                    )
-                  ],
-                ),
-                Divider(),
-                ...purchases[0].subproducts.map(
-                      (subProduct) => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: dW * 0.22,
-                            child: Text(
-                              subProduct.subProduct.name,
-                            ),
+                Container(
+                  width: double.infinity,
+                  child: DataTable(
+                    horizontalMargin: 0.0,
+                    columns: <DataColumn>[
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Name',
+                            style: TextStyle(fontStyle: FontStyle.italic),
                           ),
-                          SizedBox(
-                            width: dW * 0.21,
-                            child: Text(
-                              subProduct.quantity.toString(),
-                            ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Age',
+                            style: TextStyle(fontStyle: FontStyle.italic),
                           ),
-                          SizedBox(
-                            width: dW * 0.22,
-                            child: Text(
-                              (subProduct.cost / subProduct.quantity)
-                                  .toStringAsFixed(2),
-                            ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Role',
+                            style: TextStyle(fontStyle: FontStyle.italic),
                           ),
-                          SizedBox(
-                            width: dW * 0.2,
-                            child: Text(
-                              subProduct.cost.toString(),
-                            ),
-                          )
+                        ),
+                      ),
+                    ],
+                    rows: const <DataRow>[
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Sarah')),
+                          DataCell(Text('19')),
+                          DataCell(Text('Student')),
                         ],
                       ),
-                    ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Janine')),
+                          DataCell(Text('43')),
+                          DataCell(Text('Professor')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('William')),
+                          DataCell(Text('27')),
+                          DataCell(Text('Associate Professor')),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
