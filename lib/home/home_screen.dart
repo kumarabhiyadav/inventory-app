@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
+import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
 import '../InventoryModule/screens/product_screens.dart';
 import '../commonWidgets/options.dart';
 
@@ -37,7 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Sales',
             ),
             Options(
-              function: () {},
+              function: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PurchaseScreen()));
+              },
               size: size,
               icon: 'assets/svgs/purchase.svg',
               subTitle: 'Purchase history and add purchase',
