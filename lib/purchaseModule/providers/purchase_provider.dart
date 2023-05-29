@@ -8,23 +8,24 @@ class PurchaseProvider with ChangeNotifier {
         additionalCost: 100,
         subproducts: [
           PurchaseSubproduct(
-              cost: 100.00,
-              quantity: 10.0,
+              cost: 99.00,
+              quantity: 1.0,
+              unit: 'Meter',
+              image: "https://picsum.photos/200",
               subProduct: SubProductModel(id: "1", name: "Lace")),
           PurchaseSubproduct(
-              cost: 100.00,
-              quantity: 10.0,
-              subProduct: SubProductModel(id: "1", name: "Lace")),
-          PurchaseSubproduct(
-              cost: 100.00,
-              quantity: 10.0,
-              subProduct: SubProductModel(id: "1", name: "Lace")),
-          PurchaseSubproduct(
-              cost: 100.00,
-              quantity: 10.0,
+              cost: 1.00,
+              quantity: 1.0,
+              image: "",
+              unit: "Numbers",
               subProduct: SubProductModel(id: "1", name: "Lace")),
         ],
-        supplier: SupplierModel(address: "Thane West", name: "Ramdev"),
+        supplier:
+            SupplierModel(id: "12", address: "Thane West", name: "Ramdev"),
         date: DateTime.now())
+  ];
+
+  List<SupplierModel> suppliers = [
+    SupplierModel(id: '122', address: "Thane (w)", name: 'Ramdev Lace')
   ];
 }

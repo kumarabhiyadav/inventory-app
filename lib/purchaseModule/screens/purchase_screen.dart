@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:inventory_app/purchaseModule/screens/purhcase_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class PurchaseScreen extends StatefulWidget {
@@ -22,78 +24,157 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
       appBar: const CustomAppBar(title: 'Purchases'),
       body: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: dW * 0.05),
-            decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Colors.black12),
-                borderRadius: BorderRadius.circular(5)),
-            padding: EdgeInsets.all(dW * 0.02),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(child: Text(purchases[0].supplier.name)),
-                    Text(purchases[0].date.toIso8601String()),
-                  ],
-                ),
-                const Divider(),
-                Container(
-                  width: double.infinity,
-                  child: DataTable(
-                    horizontalMargin: 0.0,
-                    columns: <DataColumn>[
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Name',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Age',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Role',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                    ],
-                    rows: const <DataRow>[
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Sarah')),
-                          DataCell(Text('19')),
-                          DataCell(Text('Student')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Janine')),
-                          DataCell(Text('43')),
-                          DataCell(Text('Professor')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('William')),
-                          DataCell(Text('27')),
-                          DataCell(Text('Associate Professor')),
-                        ],
-                      ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PurchaseDetailScreen(
+                            purchaseModel: purchases[0],
+                          )));
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: dW * 0.05),
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.black12),
+                  borderRadius: BorderRadius.circular(5)),
+              padding: EdgeInsets.all(dW * 0.02),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(child: Text(purchases[0].supplier.name)),
+                      Text(DateFormat('dd MMM yyyy hh:mm a')
+                          .format(purchases[0].date)),
                     ],
                   ),
-                )
-              ],
+                  const Divider(),
+                  SizedBox(
+                    width: double.infinity,
+                    child: DataTable(
+                      columnSpacing: 20,
+                      horizontalMargin: 0.0,
+                      headingRowHeight: 40,
+                      dataRowHeight: 40,
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Name',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Qyt',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Rate',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Total',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ],
+                      rows: <DataRow>[
+                        ...purchases[0].subproducts.map(
+                              (sub) => DataRow(
+                                cells: <DataCell>[
+                                  DataCell(Text(sub.subProduct.name)),
+                                  DataCell(
+                                      Text(sub.quantity.toStringAsFixed(2))),
+                                  DataCell(Text((sub.cost / sub.quantity)
+                                      .toStringAsFixed(2))),
+                                  DataCell(Text(sub.cost.toStringAsFixed(2))),
+                                ],
+                              ),
+                            )
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Total Cost',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            purchases[0]
+                                .getTotalOfSubProducts()
+                                .toStringAsFixed(2),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4!
+                                .copyWith(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Extra Cost',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            purchases[0].additionalCost.toStringAsFixed(2),
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle2!
+                                .copyWith(
+                                    color: Colors.red.withOpacity(0.7),
+                                    fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Grand Total',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            (purchases[0].additionalCost +
+                                    purchases[0].getTotalOfSubProducts())
+                                .toStringAsFixed(2),
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
+import 'package:inventory_app/financeModule/screens/sales_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
+import 'package:inventory_app/purchaseModule/screens/supplier_screen.dart';
 import '../InventoryModule/screens/product_screens.dart';
 import '../commonWidgets/options.dart';
 
@@ -31,7 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 20,
           children: [
             Options(
-              function: () {},
+              function: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SalesScreen()));
+              },
               size: size,
               icon: 'assets/svgs/sales.svg',
               subTitle: 'Insert daily sales',
@@ -50,7 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Purchase',
             ),
             Options(
-              function: () {},
+              function: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SupplierScreen()));
+              },
               size: size,
               icon: 'assets/svgs/suppliers.svg',
               subTitle: 'Managing Suppliers',

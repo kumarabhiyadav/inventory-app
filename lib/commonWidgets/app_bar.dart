@@ -4,10 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:inventory_app/font_size.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key, required this.title, this.leading})
+  const CustomAppBar(
+      {Key? key, required this.title, this.leading, this.actions})
       : super(key: key);
   final String title;
   final Widget? leading;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           elevation: 0,
           centerTitle: true,
           leadingWidth: size.width * 0.2,
+          actions: actions ?? [],
           leading: leading ??
               Material(
                 child: InkWell(
