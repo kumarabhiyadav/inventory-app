@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
+import 'package:inventory_app/financeModule/screens/report_screen.dart';
 import 'package:inventory_app/financeModule/screens/sales_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/supplier_screen.dart';
@@ -81,7 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Products',
             ),
             Options(
-              function: () {},
+              function: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ReportScreen()));
+              },
               size: size,
               icon: 'assets/svgs/reports.svg',
               subTitle: 'Generate excel reports',

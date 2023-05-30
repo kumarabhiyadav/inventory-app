@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:inventory_app/colors.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/financeModule/model/sales_model.dart';
+import 'package:inventory_app/financeModule/widgets/sales_filter.dart';
 import 'package:inventory_app/financeModule/widgets/sales_input.dart';
 
 class SalesScreen extends StatefulWidget {
@@ -14,15 +16,59 @@ class SalesScreen extends StatefulWidget {
 }
 
 class _SalesScreenState extends State<SalesScreen> {
+  DateTime? filterStartDate;
+  DateTime? filterEndDate;
+
   List<SalesModel> sales = [
     SalesModel(
-        cashSaleAmount: 100.00, onlineSaleAmount: 10.99, date: DateTime.now()),
+        cashSaleAmount: 100.00,
+        id: "1",
+        onlineSaleAmount: 10.99,
+        date: DateTime.now()),
     SalesModel(
-        cashSaleAmount: 100.00, onlineSaleAmount: 10.99, date: DateTime.now())
+        cashSaleAmount: 100.00,
+        id: "2",
+        onlineSaleAmount: 10.99,
+        date: DateTime.now())
   ];
 
   addNewSales() {
-    showModalBottomSheet(context: context, builder: (context) => SalesInput());
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+          ),
+        ),
+        context: context,
+        isScrollControlled: true,
+        builder: (context) => const SalesInput()).then((value) {
+      if (value != null) {
+        print(value);
+      }
+    });
+  }
+
+  addFilter() {
+    showModalBottomSheet(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+            ),
+            context: context,
+            builder: (context) =>
+                SalesFilter(endDate: filterEndDate, startDate: filterStartDate))
+        .then((value) {
+      print(value);
+      if (value != null) {
+        setState(() {
+          filterStartDate = value['startDate'];
+          filterEndDate = value['endDate'];
+        });
+      }
+    });
   }
 
   @override
@@ -35,11 +81,18 @@ class _SalesScreenState extends State<SalesScreen> {
         actions: [
           Container(
             margin: EdgeInsets.only(right: dW * 0.05),
-            child: SvgPicture.asset(
-              'assets/svgs/filter.svg',
-              color: Colors.black,
-              height: 30,
-              width: 30,
+            child: InkWell(
+              onTap: () {
+                addFilter();
+              },
+              child: SvgPicture.asset(
+                'assets/svgs/filter.svg',
+                color: filterEndDate != null && filterStartDate != null
+                    ? iconColor
+                    : Colors.black,
+                height: 30,
+                width: 30,
+              ),
             ),
           ),
         ],
