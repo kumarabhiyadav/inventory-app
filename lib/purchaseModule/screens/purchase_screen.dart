@@ -3,7 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:inventory_app/purchaseModule/screens/add_purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/purhcase_detail_screen.dart';
+import 'package:inventory_app/purchaseModule/widget/select__supplier_for_purchase.dart';
 import 'package:provider/provider.dart';
 
 class PurchaseScreen extends StatefulWidget {
@@ -179,6 +181,36 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
+                    ),
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => const SelectSupplierForPurchase())
+                .then((value) {
+              if (value != null) {
+                print(value);
+              }
+            });
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => const AddPurchaseScreen()));
+          },
+          icon: const Icon(Icons.add),
+          label: Text(
+            'Add new purchase',
+            style: Theme.of(context)
+                .textTheme
+                .subtitle2!
+                .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+          )),
     );
   }
 }

@@ -14,54 +14,48 @@ class SupplierTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: dW * 0.05),
-      child: InkWell(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PurchaseScreen()));
-        },
-        child: Container(
-          padding: EdgeInsets.all(dW * 0.02),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Colors.black26, width: .8)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                backgroundColor: iconColor,
-                child: const Icon(
-                  Icons.person,
-                  color: Colors.white,
+      child: Container(
+        padding: EdgeInsets.all(dW * 0.02),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: Colors.black26, width: .8)),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: iconColor,
+              child: const Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              width: dW * 0.02,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  supplier.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.56,
+                      fontSize: 15),
                 ),
-              ),
-              SizedBox(
-                width: dW * 0.02,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    supplier.name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.56,
-                        fontSize: 15),
-                  ),
-                  SizedBox(
-                    height: dW * 0.01,
-                  ),
-                  Text(
-                    supplier.address,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0.25,
-                        color: Colors.black45,
-                        fontSize: 12),
-                  )
-                ],
-              ),
-            ],
-          ),
+                SizedBox(
+                  height: dW * 0.01,
+                ),
+                Text(
+                  supplier.address,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 0.25,
+                      color: Colors.black45,
+                      fontSize: 12),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inventory_app/InventoryModule/screens/product_screens.dart';
 import 'package:inventory_app/colors.dart';
 
+// ignore: must_be_immutable
 class Nametile extends StatelessWidget {
   Nametile({Key? key, required this.idNameType, required this.icon})
       : super(key: key);
@@ -15,7 +14,6 @@ class Nametile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final tS = MediaQuery.of(context).textScaleFactor;
     return ListTile(
       shape: RoundedRectangleBorder(
         side: const BorderSide(width: 1, color: Colors.black26),
