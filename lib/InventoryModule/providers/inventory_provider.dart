@@ -13,5 +13,15 @@ class InventoryProvider with ChangeNotifier {
   List<SubProductModel> subProducts = [
     SubProductModel(id: '1', name: 'Garment 1'),
     SubProductModel(id: '2', name: 'Lakme'),
+    SubProductModel(id: '1', name: 'Garment 1'),
+    SubProductModel(id: '2', name: 'Lakme'),
+    SubProductModel(id: '1', name: 'Garment 1'),
+    SubProductModel(id: '2', name: 'Lakme'),
+    SubProductModel(id: '1', name: 'Garment 1'),
+    SubProductModel(id: '2', name: 'Lakme'),
+    SubProductModel(id: '1', name: 'Garment 1'),
+    SubProductModel(id: '2', name: 'Lakme'),
+    SubProductModel(id: '1', name: 'Garment 1'),
+    SubProductModel(id: '2', name: 'Lakme'),
   ];
 }

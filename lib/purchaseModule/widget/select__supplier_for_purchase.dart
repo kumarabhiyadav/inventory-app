@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/purchaseModule/screens/show_added_purchase_products.dart';
 import 'package:provider/provider.dart';
 
 import '../models/purchase_model.dart';
@@ -53,7 +54,7 @@ class _SelectSupplierForPurchaseState extends State<SelectSupplierForPurchase> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddPurchaseScreen(
+                          builder: (context) => ShowAddPurchaseProducts(
                                 supplierModel: suppliers[index],
                               )));
                 },
