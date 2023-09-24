@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
 import 'package:inventory_app/financeModule/model/sales_model.dart';
+import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:provider/provider.dart';
 
 class SalesInput extends StatefulWidget {
   const SalesInput({Key? key}) : super(key: key);
@@ -23,6 +25,18 @@ class _SalesInputState extends State<SalesInput> {
     setState(() {
       dateController.text = DateFormat('dd MMM yyyy').format(selectedDate);
     });
+  }
+
+  formSubmit() {
+    if (_formKey.currentState!.validate()) {
+      Provider.of<PurchaseProvider>(context, listen: false).createSales(body: {
+        'date': selectedDate.toIso8601String(),
+        'onlineAmount': onlineAmountController.text,
+        'cashAmount': cashAmountController.text
+      });
+
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -56,6 +70,10 @@ class _SalesInputState extends State<SalesInput> {
                 }),
                 child: TextFormField(
                   controller: dateController,
+                  validator: ((value) {
+                    if (value!.trim().isEmpty) return "Please Choose a date";
+                    return null;
+                  }),
                   style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.w600),
                   enabled: false,
@@ -77,13 +95,9 @@ class _SalesInputState extends State<SalesInput> {
               child: TextFormField(
                 controller: onlineAmountController,
                 validator: ((value) {
-                  if (value != null) {
-                    if (double.tryParse(value) != null) {
-                      return null;
-                    }
-                  } else {
-                    return 'Enter online amount';
-                  }
+                  if (value!.isEmpty) return "Please enter online Amount";
+                  if (double.tryParse(value) == null)
+                    return "Please enter number only";
                   return null;
                 }),
                 keyboardType: TextInputType.number,
@@ -105,13 +119,9 @@ class _SalesInputState extends State<SalesInput> {
               child: TextFormField(
                 controller: cashAmountController,
                 validator: ((value) {
-                  if (value != null) {
-                    if (double.tryParse(value) != null) {
-                      return null;
-                    }
-                  } else {
-                    return 'Enter cash amount';
-                  }
+                  if (value!.isEmpty) return "Please enter cash Amount";
+                  if (double.tryParse(value) == null)
+                    return "Please enter number only";
                   return null;
                 }),
                 keyboardType: TextInputType.number,
@@ -129,21 +139,7 @@ class _SalesInputState extends State<SalesInput> {
               height: dW * 0.05,
             ),
             PrimaryButton(
-                function: () {
-                  if (onlineAmountController.text.isEmpty &&
-                      cashAmountController.text.isEmpty) {
-                    Navigator.pop(context);
-                  } else {
-                    if (_formKey.currentState!.validate()) {
-                      Navigator.pop(context, {
-                        'online':
-                            double.tryParse(onlineAmountController.text) ?? 0.0,
-                        'cash':
-                            double.tryParse(cashAmountController.text) ?? 0.0,
-                      });
-                    }
-                  }
-                },
+                function: formSubmit,
                 height: dW * 0.12,
                 title: 'Add Sales Amount',
                 width: double.infinity)

@@ -51,4 +51,6 @@ class SupplierModel {
   String name;
   String address;
   SupplierModel({required this.id, required this.address, required this.name});
+
+  static fromJson(data) => SupplierModel(id: data['_id'], address: data['address'], name: data['name']);
 }

@@ -3,6 +3,7 @@ import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart'
 import 'package:inventory_app/font_size.dart';
 import 'package:inventory_app/home/home_screen.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:inventory_app/purchaseModule/providers/supplier_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => InventoryProvider()),
         ChangeNotifierProvider(create: (_) => PurchaseProvider()),
+        ChangeNotifierProvider(create: (_) => SupplierProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

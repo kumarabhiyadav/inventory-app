@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
-import 'package:inventory_app/purchaseModule/screens/add_purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/purhcase_detail_screen.dart';
 import 'package:inventory_app/purchaseModule/widget/select__supplier_for_purchase.dart';
 import 'package:provider/provider.dart';
@@ -117,7 +116,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Total Cost',
+                            'Products Cost',
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                           const SizedBox(
@@ -214,3 +213,4 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
     );
   }
 }
+  

@@ -7,6 +7,8 @@ import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/financeModule/model/sales_model.dart';
 import 'package:inventory_app/financeModule/widgets/sales_filter.dart';
 import 'package:inventory_app/financeModule/widgets/sales_input.dart';
+import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:provider/provider.dart';
 
 class SalesScreen extends StatefulWidget {
   const SalesScreen({Key? key}) : super(key: key);
@@ -19,18 +21,7 @@ class _SalesScreenState extends State<SalesScreen> {
   DateTime? filterStartDate;
   DateTime? filterEndDate;
 
-  List<SalesModel> sales = [
-    SalesModel(
-        cashSaleAmount: 100.00,
-        id: "1",
-        onlineSaleAmount: 10.99,
-        date: DateTime.now()),
-    SalesModel(
-        cashSaleAmount: 100.00,
-        id: "2",
-        onlineSaleAmount: 10.99,
-        date: DateTime.now())
-  ];
+
 
   addNewSales() {
     showModalBottomSheet(
@@ -72,8 +63,18 @@ class _SalesScreenState extends State<SalesScreen> {
   }
 
   @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 100), () async {
+      Provider.of<PurchaseProvider>(context, listen: false).fetchSales();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final dW = MediaQuery.of(context).size.width;
+
+    final List<SalesModel> sales =  Provider.of<PurchaseProvider>(context).sales;
 
     return Scaffold(
       appBar: CustomAppBar(

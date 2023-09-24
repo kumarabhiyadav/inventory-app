@@ -3,10 +3,11 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
+import 'package:inventory_app/purchaseModule/providers/supplier_provider.dart';
+import 'package:inventory_app/purchaseModule/screens/add_supplier_screen.dart';
 import 'package:inventory_app/purchaseModule/widget/supplier_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/purchase_provider.dart';
 
 class SupplierScreen extends StatefulWidget {
   const SupplierScreen({Key? key}) : super(key: key);
@@ -16,12 +17,22 @@ class SupplierScreen extends StatefulWidget {
 }
 
 class _SupplierScreenState extends State<SupplierScreen> {
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 100), () async {
+      Provider.of<SupplierProvider>(context, listen: false).fetchSuppliers();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final dW = MediaQuery.of(context).size.width;
 
     final List<SupplierModel> suppliers =
-        Provider.of<PurchaseProvider>(context).suppliers;
+        Provider.of<SupplierProvider>(context).suppliers;
     return Scaffold(
       appBar: const CustomAppBar(title: 'Suppliers'),
       body: Column(
@@ -42,9 +53,10 @@ class _SupplierScreenState extends State<SupplierScreen> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
               padding: EdgeInsets.symmetric(vertical: dW * 0.05),
               itemCount: suppliers.length,
+              separatorBuilder: (context, index) => const Divider(color: Colors.transparent,),
               itemBuilder: (context, index) => SupplierTile(
                 dW: dW,
                 supplier: suppliers[index],
@@ -53,6 +65,10 @@ class _SupplierScreenState extends State<SupplierScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddSupplierScreen())),
+          label: Text("New Supplier")),
     );
   }
 }
