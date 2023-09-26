@@ -42,6 +42,7 @@ class PurchaseProvider with ChangeNotifier {
     print(responseBody);
     if (responseBody != null) {
       _sales.insert(0, SalesModel.fromJson(responseBody['result']));
+      notifyListeners();
     }
   }
 

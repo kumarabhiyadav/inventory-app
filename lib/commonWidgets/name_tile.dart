@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:inventory_app/InventoryModule/screens/product_screens.dart';
 import 'package:inventory_app/colors.dart';
 
 // ignore: must_be_immutable
@@ -20,32 +19,7 @@ class Nametile extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       onTap: () {
-        switch (idNameType['type']) {
-          case 'Category':
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductScreen(
-                  categoryId: idNameType['id']!,
-                  categoryName: idNameType['name']!,
-                ),
-              ),
-            );
-            break;
-
-          case 'Product':
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SubProductScreen(
-                  productName: idNameType['name']!,
-                  productId: idNameType['id']!,
-                ),
-              ),
-            );
-            break;
-          default:
-        }
+        
       },
       title: Text(
         idNameType['name']!,
