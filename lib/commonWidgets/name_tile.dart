@@ -5,9 +5,9 @@ import 'package:inventory_app/colors.dart';
 
 // ignore: must_be_immutable
 class Nametile extends StatelessWidget {
-  Nametile({Key? key, required this.idNameType, required this.icon})
-      : super(key: key);
-  Map<String, String> idNameType = {};
+  Nametile({Key? key, required this.name, required this.icon})
+    : super(key: key);
+   String name;
   String icon;
 
   @override
@@ -18,11 +18,8 @@ class Nametile extends StatelessWidget {
         side: const BorderSide(width: 1, color: Colors.black26),
         borderRadius: BorderRadius.circular(5),
       ),
-      onTap: () {
-        
-      },
       title: Text(
-        idNameType['name']!,
+        name,
         style: Theme.of(context)
             .textTheme
             .headline5!

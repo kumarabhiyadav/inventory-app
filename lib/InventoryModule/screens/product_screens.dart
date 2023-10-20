@@ -35,12 +35,8 @@ class _ProductScreenState extends State<ProductScreen> {
               color: Colors.transparent,
             )),
         itemBuilder: ((context, index) => Nametile(
-              icon: 'assets/svgs/product.svg',
-              idNameType: {
-                'id': products[index].id,
-                'name': products[index].name,
-                'type': 'Product'
-              },
+            icon:  products[index].imagePath,
+              name: products[index].name,
             )),
         itemCount: products.length,
       ),
@@ -76,12 +72,10 @@ class _SubProductScreenState extends State<SubProductScreen> {
               color: Colors.transparent,
             )),
         itemBuilder: ((context, index) => Nametile(
-              icon: 'assets/svgs/subproduct.svg',
-              idNameType: {
-                'id': subProducts[index].id,
-                'name': subProducts[index].name,
-                'type': 'SubProduct'
-              },
+              icon:  subProducts[index].imagePath,
+              name: subProducts[index].name,
+              
+             
             )),
         itemCount: subProducts.length,
       ),

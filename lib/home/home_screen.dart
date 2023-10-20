@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/InventoryModule/screens/category_screen.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/financeModule/screens/report_screen.dart';
 import 'package:inventory_app/financeModule/screens/sales_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/supplier_screen.dart';
-import '../InventoryModule/screens/product_screens.dart';
 import '../commonWidgets/options.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: const CustomAppBar(
+        key: Key(""),
         leading: SizedBox.shrink(),
         title: 'S. S Fashion',
       ),
