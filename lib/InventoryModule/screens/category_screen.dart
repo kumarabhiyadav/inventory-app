@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/InventoryModule/screens/product_screens.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/name_tile.dart';
+import 'package:inventory_app/commonWidgets/primary_button.dart';
+import 'package:inventory_app/commonWidgets/snack_bar.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -14,9 +18,10 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  final TextEditingController _categoryController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     final List<CategoryModel> categories =
         Provider.of<InventoryProvider>(context).categories;
@@ -31,8 +36,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               color: Colors.transparent,
             )),
         itemBuilder: ((context, index) => GestureDetector(
-              onTap: () =>
-                Navigator.push(
+              onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProductScreen(
@@ -47,31 +51,68 @@ class _CategoryScreenState extends State<CategoryScreen> {
             )),
         itemCount: categories.length,
       ),
-
-       floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) =>  Container(
-                      height: size.height*0.5,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                ),
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => Container(
+                      padding: EdgeInsets.all(size.width * 0.05),
+                      height: size.height * 0.5,
                       child: Column(
                         children: [
-                          
+                          TextFormField(
+                            controller: _categoryController,
+                            validator: ((value) {
+                              if (value!.trim().isEmpty) {
+                                return "Please Choose a date";
+                              }
+                              return null;
+                            }),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600),
+                            decoration: const InputDecoration(
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                fillColor: Colors.black12,
+                                focusColor: Colors.grey,
+                                filled: true,
+                                hintText: "Enter category"),
+                          ),
+                          SizedBox(
+                            height: size.width * 0.05,
+                          ),
+                          PrimaryButton(
+                              function: () async {
+                                if (_categoryController.text.trim() == "") {
+                                  return;
+                                }
+                               final response  = await Provider.of<InventoryProvider>(context,
+                                        listen: false)
+                                    .createCategory(
+                                        name: _categoryController.text);
+                                        Navigator.of(context).pop();
+                                        if(response!=null){
+                                           showSnackBar(context: context, title: "Category Added Successfully");
+                                           setState(() {
+                                             _categoryController.text = "";
+                                           });
+                                        }
+
+                              },
+                              height: size.width * 0.12,
+                              title: "Save",
+                              width: size.width * 0.9)
                         ],
                       ),
-                    ))
-                .then((value) {
-              if (value != null) {
-                print(value);
-              }
-            });
+                    ));
             // Navigator.push(
             //     context,
             //     MaterialPageRoute(

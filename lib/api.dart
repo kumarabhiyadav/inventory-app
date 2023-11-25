@@ -9,8 +9,18 @@ const endPoints = {
   'createSales' : 'finance/createSales',
   'fetchSales' : 'finance/fetchSales',
 
+  'createCategory' : 'inventory/createCategory',
+  'createProduct' : 'inventory/createProduct',
+  'createSubproduct' : 'inventory/createSubproduct',
+
+  'fetchCategories' : 'inventory/fetchCategories',
+  'fetchProducts' : 'inventory/fetchProducts',
+  'fetchSubProducts' : 'inventory/fetchSubProducts',
 
 
+
+
+  
 
 };
 

@@ -3,6 +3,9 @@ class CategoryModel {
   String name;
   String imagePath = "assets/svgs/category.svg";
   CategoryModel({required this.id, required this.name});
+
+  
+ static fromJson(data) => CategoryModel(id: data['_id'], name: data['name']);
 }
 
 class ProductModel {
