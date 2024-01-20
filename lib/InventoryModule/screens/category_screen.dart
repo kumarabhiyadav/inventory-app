@@ -21,6 +21,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final TextEditingController _categoryController = TextEditingController();
 
   @override
+  void initState() {
+    myInit();
+    super.initState();
+  }
+
+  myInit() async {
+    await Provider.of<InventoryProvider>(context, listen: false)
+        .fetchCategory();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final List<CategoryModel> categories =
@@ -94,18 +105,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 if (_categoryController.text.trim() == "") {
                                   return;
                                 }
-                               final response  = await Provider.of<InventoryProvider>(context,
-                                        listen: false)
-                                    .createCategory(
-                                        name: _categoryController.text);
-                                        Navigator.of(context).pop();
-                                        if(response!=null){
-                                           showSnackBar(context: context, title: "Category Added Successfully");
-                                           setState(() {
-                                             _categoryController.text = "";
-                                           });
-                                        }
-
+                                final response =
+                                    await Provider.of<InventoryProvider>(
+                                            context,
+                                            listen: false)
+                                        .createCategory(
+                                            name: _categoryController.text);
+                                Navigator.of(context).pop();
+                                if (response != null) {
+                                  showSnackBar(
+                                      context: context,
+                                      title: "Category Added Successfully");
+                                  setState(() {
+                                    _categoryController.text = "";
+                                  });
+                                }
                               },
                               height: size.width * 0.12,
                               title: "Save",

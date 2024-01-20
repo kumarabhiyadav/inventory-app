@@ -6,10 +6,8 @@ import 'package:inventory_app/api.dart';
 import 'package:inventory_app/services/http_service.dart';
 
 class InventoryProvider with ChangeNotifier {
-  List<CategoryModel> categories = [
-    CategoryModel(id: '1', name: 'Cloths'),
-    CategoryModel(id: '2', name: 'Cosmetic'),
-  ];
+  List<CategoryModel> categories = [];
+
   List<ProductModel> products = [
     ProductModel(id: '1', name: 'Inner Garments'),
     ProductModel(id: '2', name: 'Eye Liner'),
@@ -29,13 +27,22 @@ class InventoryProvider with ChangeNotifier {
     SubProductModel(id: '2', name: 'Lakme'),
   ];
 
-  createCategory({required String name})async {
-    final response = await HttpService.postRequest(getEndPoint('createCategory'), jsonEncode({"name":name}));
+  createCategory({required String name}) async {
+    final response = await HttpService.postRequest(
+        getEndPoint('createCategory'), jsonEncode({"name": name}));
     return response;
   }
 
-  fetchCategory({required String name})async {
-    final response = await HttpService.getRequest(getEndPoint('fetchCategories'));
-    return response;
+  fetchCategory() async {
+    final response =
+        await HttpService.getRequest(getEndPoint('fetchCategories'));
+
+    response.forEach((category) => {
+          categories
+              .add(CategoryModel(id: category['id'], name: category['name']))
+        });
+
+    notifyListeners();
+    // return response;
   }
 }
