@@ -12,14 +12,17 @@ class ProductModel {
   final String id;
   String name;
   String imagePath = "assets/svgs/product.svg";
+  String category;
 
-  ProductModel({required this.id, required this.name});
+  ProductModel({required this.id, required this.name,required this.category});
 }
 
 class SubProductModel {
   final String id;
   String name;
   String imagePath = "assets/svgs/subproduct.svg";
+  String category;
+  String product;
 
-  SubProductModel({required this.id, required this.name});
+  SubProductModel({required this.id, required this.name,required this.category,required this.product});
 }

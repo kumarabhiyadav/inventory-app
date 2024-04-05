@@ -1,5 +1,8 @@
-// const domain =  "http://localhost:6001";
-const domain = "http://127.0.0.1:6001";
+// const domain =  "http://192.168.0.102:6001";
+// const domain = "http://127.0.0.1:6001";
+
+const domain = "http://13.60.46.80:6001";
+
 
 
 const endPoints = {
@@ -11,7 +14,7 @@ const endPoints = {
 
   'createCategory' : 'inventory/createCategory',
   'createProduct' : 'inventory/createProduct',
-  'createSubproduct' : 'inventory/createSubproduct',
+  'createSubProduct' : 'inventory/createSubProduct',
 
   'fetchCategories' : 'inventory/fetchCategories',
   'fetchProducts' : 'inventory/fetchProducts',

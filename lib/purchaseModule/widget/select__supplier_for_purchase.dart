@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:inventory_app/purchaseModule/providers/supplier_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/show_added_purchase_products.dart';
 import 'package:provider/provider.dart';
 
 import '../models/purchase_model.dart';
-import '../providers/purchase_provider.dart';
-import '../screens/add_purchase_screen.dart';
+
 import 'supplier_tile.dart';
 
 class SelectSupplierForPurchase extends StatefulWidget {
@@ -16,10 +17,23 @@ class SelectSupplierForPurchase extends StatefulWidget {
 }
 
 class _SelectSupplierForPurchaseState extends State<SelectSupplierForPurchase> {
+
+  @override
+  void initState() {
+    myInit();
+    super.initState();
+  }
+
+  myInit()async {
+
+    await Provider.of<SupplierProvider>(context,listen: false).fetchSuppliers();
+     
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<SupplierModel> suppliers =
-        Provider.of<PurchaseProvider>(context).suppliers;
+        Provider.of<SupplierProvider>(context).filteredList;
     final dW = MediaQuery.of(context).size.width;
     final dH = MediaQuery.of(context).size.height;
 
@@ -35,6 +49,7 @@ class _SelectSupplierForPurchaseState extends State<SelectSupplierForPurchase> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: TextFormField(
+                onChanged: ((value) => Provider.of<SupplierProvider>(context,listen: false).searchSupplier(value)),
                 decoration: const InputDecoration(
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -46,11 +61,14 @@ class _SelectSupplierForPurchaseState extends State<SelectSupplierForPurchase> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: ((context, index) => const Divider(color: Colors.transparent,)),
               padding: EdgeInsets.symmetric(vertical: dW * 0.05),
               itemCount: suppliers.length,
               itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
+                onTap: () {   
+
+                  Provider.of<PurchaseProvider>(context,listen: false).inistate(suppliers[index]);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

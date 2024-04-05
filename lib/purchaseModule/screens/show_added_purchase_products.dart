@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
+import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/add_purchase_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../commonWidgets/app_bar.dart';
 import '../models/purchase_model.dart';
@@ -20,8 +22,11 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
   Widget build(BuildContext context) {
     final dW = MediaQuery.of(context).size.width;
     final dH = MediaQuery.of(context).size.width;
+    final PurchaseModel? purchaseModel =
+        Provider.of<PurchaseProvider>(context).currentPurchaseModel;
     return Scaffold(
       appBar: CustomAppBar(title: widget.supplierModel.name),
+      body: purchaseModel != null ? Column(children: []) : null,
       floatingActionButton: PrimaryButton(
         function: () {
           Navigator.push(context,

@@ -10,6 +10,7 @@ import 'package:inventory_app/services/http_service.dart';
 class PurchaseProvider with ChangeNotifier {
   List<SalesModel> _sales = [];
   List<SalesModel> get sales => [..._sales];
+  PurchaseModel? currentPurchaseModel;
   List<PurchaseModel> purchase = [
     PurchaseModel(
         additionalCost: 100,
@@ -19,13 +20,15 @@ class PurchaseProvider with ChangeNotifier {
               quantity: 1.0,
               unit: 'Meter',
               image: "https://picsum.photos/200",
-              subProduct: SubProductModel(id: "1", name: "Lace")),
+              subProduct: SubProductModel(
+                  id: "1", name: "Lace", category: "", product: "")),
           PurchaseSubproduct(
               cost: 1.00,
               quantity: 1.0,
               image: "",
               unit: "Numbers",
-              subProduct: SubProductModel(id: "1", name: "Lace")),
+              subProduct: SubProductModel(
+                  id: "1", name: "Lace", category: "", product: "")),
         ],
         supplier:
             SupplierModel(id: "12", address: "Thane West", name: "Ramdev"),
@@ -56,4 +59,17 @@ class PurchaseProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  inistate(SupplierModel supplier) {
+    currentPurchaseModel = PurchaseModel(
+        additionalCost: 0.0,
+        subproducts: [],
+        supplier: supplier,
+        date: DateTime.now());
+        notifyListeners();
+  }
+
+  addSubProduct(SubProductModel subProductModel) {}
+
+  deleteSubProduct(SubProductModel subProductModel) {}
 }

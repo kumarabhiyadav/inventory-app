@@ -1,44 +1,48 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
-import 'package:inventory_app/InventoryModule/screens/product_screens.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/name_tile.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
 import 'package:inventory_app/commonWidgets/snack_bar.dart';
 import 'package:provider/provider.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+class SubProductScreen extends StatefulWidget {
+   SubProductScreen(
+      {Key? key, required this.productModel, required this.categoryModel})
+      : super(key: key);
+  
+  ProductModel productModel;
+  CategoryModel categoryModel;
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<SubProductScreen> createState() => _SubProductScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
-  final TextEditingController _categoryController = TextEditingController();
+class _SubProductScreenState extends State<SubProductScreen> {
+  final TextEditingController _subProductController = TextEditingController();
 
-  @override
+
+   @override
   void initState() {
     myInit();
     super.initState();
   }
 
   myInit() async {
-    await Provider.of<InventoryProvider>(context, listen: false)
-        .fetchCategories();
+     await Provider.of<InventoryProvider>(context, listen: false)
+        .fetchSubProducts(widget.productModel.id);
   }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final List<CategoryModel> categories =
-        Provider.of<InventoryProvider>(context).categories;
+    final List<SubProductModel> subProducts =
+        Provider.of<InventoryProvider>(context).subProducts;
 
     return Scaffold(
-      appBar: const CustomAppBar(title: "Categories"),
+      appBar: CustomAppBar(title: widget.productModel.name),
       body: ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(
@@ -46,19 +50,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
         separatorBuilder: ((context, index) => const Divider(
               color: Colors.transparent,
             )),
-        itemBuilder: ((context, index) => GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductScreen(categoryModel: categories[index])
-                ),
-              ),
-              child: Nametile(
-                icon: categories[index].imagePath,
-                name: categories[index].name,
-              ),
+        itemBuilder: ((context, index) => Nametile(
+              icon:  subProducts[index].imagePath,
+              name: subProducts[index].name,
+              
+             
             )),
-        itemCount: categories.length,
+        itemCount: subProducts.length,
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
@@ -77,10 +75,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: Column(
                         children: [
                           TextFormField(
-                            controller: _categoryController,
+                            controller: _subProductController,
                             validator: ((value) {
                               if (value!.trim().isEmpty) {
-                                return "Please Choose a date";
+                                return "Please enter sub product";
                               }
                               return null;
                             }),
@@ -93,29 +91,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 fillColor: Colors.black12,
                                 focusColor: Colors.grey,
                                 filled: true,
-                                hintText: "Enter category"),
+                                hintText: "Enter Sub Product"),
                           ),
                           SizedBox(
                             height: size.width * 0.05,
                           ),
                           PrimaryButton(
                               function: () async {
-                                if (_categoryController.text.trim() == "") {
+                                if (_subProductController.text.trim() == "") {
                                   return;
                                 }
                                 final response =
                                     await Provider.of<InventoryProvider>(
                                             context,
                                             listen: false)
-                                        .createCategory(
-                                            name: _categoryController.text);
+                                        .createSubProduct(
+                                            name: _subProductController.text,categoryModel: widget.categoryModel,productModel: widget.productModel);
                                 Navigator.of(context).pop();
                                 if (response != null) {
                                   showSnackBar(
                                       context: context,
-                                      title: "Category Added Successfully");
+                                      title: "Product Added Successfully");
                                   setState(() {
-                                    _categoryController.text = "";
+                                    _subProductController.text = "";
                                   });
                                 }
                               },
@@ -125,14 +123,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ],
                       ),
                     ));
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => const AddPurchaseScreen()));
+           
           },
           icon: const Icon(Icons.add),
           label: Text(
-            'Add New Category',
+            'Add New Sub Product',
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/name_tile.dart';
@@ -19,11 +20,11 @@ class AddPurchaseScreen extends StatefulWidget {
 
 class _AddPurchaseScreenState extends State<AddPurchaseScreen> {
   List<PurchaseSubproduct> _purchaseSubproducts = [];
-  addNewProduct() {
+  addNewProduct(SubProductModel subProductModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
-        builder: (context) => AddProductForPurchase());
+        builder: (context) => AddProductForPurchase(subProductModel: subProductModel,));
   }
 
   @override
@@ -48,27 +49,13 @@ class _AddPurchaseScreenState extends State<AddPurchaseScreen> {
                     fillColor: Colors.black12,
                     focusColor: Colors.grey,
                     filled: true,
-                    hintText: "Select Category"),
+                    hintText: "Select Sub Product"),
               ),
             ),
             SizedBox(
               height: dW * 0.05,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    fillColor: Colors.black12,
-                    focusColor: Colors.grey,
-                    filled: true,
-                    hintText: "Search product"),
-              ),
-            ),
-            SizedBox(
-              height: dW * 0.1,
-            ),
+           
             Expanded(
                 child: ListView.separated(
               separatorBuilder: ((context, index) => const Divider(
@@ -79,7 +66,7 @@ class _AddPurchaseScreenState extends State<AddPurchaseScreen> {
                   color: Colors.transparent,
                   child: InkWell(
                       onTap: () {
-                        addNewProduct();
+                        addNewProduct(subProduct[index]);
                       },
                       child:
                           SubProductTile(subProductModel: subProduct[index]))),
