@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:inventory_app/api.dart';
-import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
+import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/services/http_service.dart';
 
 class SupplierProvider with ChangeNotifier {

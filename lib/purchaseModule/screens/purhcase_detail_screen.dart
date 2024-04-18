@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
-import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
+import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
 
 import '../../colors.dart';
 
@@ -52,7 +52,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                     ),
                     Text(
                       DateFormat('dd MMM yyyy hh:mm a')
-                          .format(widget.purchaseModel.date),
+                          .format(widget.purchaseModel.createdAt),
                       style: Theme.of(context)
                           .textTheme
                           .headline5!
@@ -76,9 +76,10 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   height: 5,
                 ),
                 Text(
-                  widget.purchaseModel
-                      .getTotalOfSubProducts()
-                      .toStringAsFixed(2),
+                  // widget.purchaseModel
+                  //     .getTotalOfSubProducts()
+                  //     .toStringAsFixed(2),
+                  "",
                   style: Theme.of(context)
                       .textTheme
                       .headline4!
@@ -98,7 +99,8 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   height: 5,
                 ),
                 Text(
-                  widget.purchaseModel.additionalCost.toStringAsFixed(2),
+                  // widget.purchaseModel.additionalCost.toStringAsFixed(2),
+                  "",
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(
                       color: Colors.red.withOpacity(0.7),
                       fontWeight: FontWeight.w600),
@@ -117,9 +119,10 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   height: 5,
                 ),
                 Text(
-                  (widget.purchaseModel.additionalCost +
-                          widget.purchaseModel.getTotalOfSubProducts())
-                      .toStringAsFixed(2),
+                  // (widget.purchaseModel.additionalCost +
+                  //         widget.purchaseModel.getTotalOfSubProducts())
+                  //     .toStringAsFixed(2),
+                  "",
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ],
@@ -127,7 +130,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
             SizedBox(
               height: dW * 0.05,
             ),
-            ...widget.purchaseModel.subproducts.map((sub) => Container(
+            ...widget.purchaseModel.subProdut.map((sub) => Container(
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.8, color: Colors.black12),
                       color: Colors.white,
@@ -152,7 +155,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                sub.subProduct.name,
+                                sub.image,
                                 style: Theme.of(context).textTheme.headline4,
                               ),
                               Text(
@@ -212,19 +215,24 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               const Text('Cost'),
-                              Text(widget.purchaseModel
-                                  .rateWithExtraCost(subProduct: sub)
-                                  .toStringAsFixed(2)),
+                              // Text(widget.purchaseModel
+                              //     .rateWithExtraCost(subProduct: sub)
+                              //     .toStringAsFixed(2)),m
+
+                              Text('data'),
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               const Text('Total'),
-                              Text((widget.purchaseModel
-                                          .rateWithExtraCost(subProduct: sub) *
-                                      sub.quantity)
-                                  .toStringAsFixed(2)),
+                              Text(
+                                // (widget.purchaseModel
+                                //           .rateWithExtraCost(subProduct: sub) *
+                                //       sub.quantity)
+                                //   .toStringAsFixed(2)
+                                ""
+                                  ),
                             ],
                           ),
                         ],

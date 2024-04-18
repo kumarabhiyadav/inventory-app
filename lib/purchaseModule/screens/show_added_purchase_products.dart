@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
+import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/add_purchase_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../commonWidgets/app_bar.dart';
-import '../models/purchase_model.dart';
+import '../models/purchase.model.dart';
 
 class ShowAddPurchaseProducts extends StatefulWidget {
   const ShowAddPurchaseProducts({Key? key, required this.supplierModel})
@@ -21,7 +22,6 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
   @override
   Widget build(BuildContext context) {
     final dW = MediaQuery.of(context).size.width;
-    final dH = MediaQuery.of(context).size.width;
     final PurchaseModel? purchaseModel =
         Provider.of<PurchaseProvider>(context).currentPurchaseModel;
     return Scaffold(

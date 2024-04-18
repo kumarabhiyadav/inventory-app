@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
-import 'package:provider/provider.dart';
-
-import '../../InventoryModule/providers/inventory_provider.dart';
-import 'sub_product_tile.dart';
+import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
 
 class AddProductForPurchase extends StatefulWidget {
-  const AddProductForPurchase({Key? key,required this.subProductModel}) : super(key: key);
+  const AddProductForPurchase({Key? key, required this.subProductModel})
+      : super(key: key);
 
   final SubProductModel subProductModel;
 
@@ -26,7 +23,6 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
     final dH = MediaQuery.of(context).size.height;
     final dW = MediaQuery.of(context).size.width;
 
-
     return Container(
       height: dH * 0.9,
       width: double.infinity,
@@ -34,8 +30,13 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            widget.subProductModel.name,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const Divider(),
           const Text("Unit"),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Wrap(
@@ -79,7 +80,6 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                 filled: true,
                 hintText: "Cost of Product"),
           ),
-
           const SizedBox(
             height: 10,
           ),
@@ -93,17 +93,22 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
             decoration: const InputDecoration(
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
-                
                 fillColor: Colors.black12,
                 focusColor: Colors.grey,
                 filled: true,
-                
                 hintText: "Quantity"),
           ),
-          SizedBox(height: dH*0.05,),
-          PrimaryButton(function: (){
-
-          }, height: dW*0.12, title: "Save Product", width: double.infinity)
+          SizedBox(
+            height: dH * 0.05,
+          ),
+          PrimaryButton(
+              function: () {
+                
+                
+              },
+              height: dW * 0.12,
+              title: "Save Product",
+              width: double.infinity)
         ],
       ),
     );

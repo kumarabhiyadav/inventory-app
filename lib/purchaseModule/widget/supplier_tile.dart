@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/colors.dart';
-import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
-import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
+import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
+
 
 class SupplierTile extends StatelessWidget {
   const SupplierTile({Key? key, required this.dW, required this.supplier})

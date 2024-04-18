@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
-import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
+import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/purchaseModule/providers/supplier_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/add_supplier_screen.dart';
 import 'package:inventory_app/purchaseModule/widget/supplier_tile.dart';

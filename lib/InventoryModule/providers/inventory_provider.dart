@@ -9,6 +9,7 @@ class InventoryProvider with ChangeNotifier {
   List<CategoryModel> categories = [];
   List<ProductModel> products = [];
   List<SubProductModel> subProducts = [];
+  List<SubProductModel> searchedSubProduct = [];
 
   createCategory({required String name}) async {
     final response = await HttpService.postRequest(
@@ -55,6 +56,17 @@ class InventoryProvider with ChangeNotifier {
         await HttpService.getRequest("${getEndPoint('fetchSubProducts')}/product/$productId");
         response['result'].forEach((subProduct) => {
           subProducts
+              .add(SubProductModel(id: subProduct['_id'], name: subProduct['name'],category: subProduct['category'],product: subProduct['product']))
+        });
+    notifyListeners();
+  }
+
+  searchSubProducts(String query) async {
+    searchedSubProduct = [];
+    final response =
+        await HttpService.getRequest("${getEndPoint('searchSubProducts')}?query=$query");
+        response['result'].forEach((subProduct) => {
+          searchedSubProduct
               .add(SubProductModel(id: subProduct['_id'], name: subProduct['name'],category: subProduct['category'],product: subProduct['product']))
         });
     notifyListeners();

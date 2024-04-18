@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/providers/supplier_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/show_added_purchase_products.dart';
 import 'package:provider/provider.dart';
 
-import '../models/purchase_model.dart';
 
 import 'supplier_tile.dart';
 
@@ -67,8 +67,6 @@ class _SelectSupplierForPurchaseState extends State<SelectSupplierForPurchase> {
               itemCount: suppliers.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {   
-
-                  Provider.of<PurchaseProvider>(context,listen: false).inistate(suppliers[index]);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

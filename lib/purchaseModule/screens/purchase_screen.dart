@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
-import 'package:inventory_app/purchaseModule/models/purchase_model.dart';
+import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/purhcase_detail_screen.dart';
 import 'package:inventory_app/purchaseModule/widget/select__supplier_for_purchase.dart';
@@ -91,7 +91,7 @@ class PurchaseWidget extends StatelessWidget {
             children: [
               SizedBox(child: Text(purchases[0].supplier.name)),
               Text(DateFormat('dd MMM yyyy hh:mm a')
-                  .format(purchases[0].date)),
+                  .format(purchases[0].createdAt)),
             ],
           ),
           const Divider(),
@@ -137,10 +137,10 @@ class PurchaseWidget extends StatelessWidget {
                 ),
               ],
               rows: <DataRow>[
-                ...purchases[0].subproducts.map(
+                ...purchases[0].subProdut.map(
                       (sub) => DataRow(
                         cells: <DataCell>[
-                          DataCell(Text(sub.subProduct.name)),
+                          DataCell(Text(sub.name)),
                           DataCell(
                               Text(sub.quantity.toStringAsFixed(2))),
                           DataCell(Text((sub.cost / sub.quantity)
@@ -167,9 +167,7 @@ class PurchaseWidget extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    purchases[0]
-                        .getTotalOfSubProducts()
-                        .toStringAsFixed(2),
+                    "",
                     style: Theme.of(context)
                         .textTheme
                         .headline4!
@@ -188,7 +186,8 @@ class PurchaseWidget extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    purchases[0].additionalCost.toStringAsFixed(2),
+                    // purchases[0].additionalCost.toStringAsFixed(2),
+                    "",
                     style: Theme.of(context)
                         .textTheme
                         .subtitle2!
@@ -209,9 +208,10 @@ class PurchaseWidget extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    (purchases[0].additionalCost +
-                            purchases[0].getTotalOfSubProducts())
-                        .toStringAsFixed(2),
+                    // (purchases[0].additionalCost +
+                    //         purchases[0].getTotalOfSubProducts())
+                    //     .toStringAsFixed(2),
+                    "",
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],
