@@ -67,6 +67,7 @@ class _SelectSupplierForPurchaseState extends State<SelectSupplierForPurchase> {
               itemCount: suppliers.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {   
+                  Provider.of<PurchaseProvider>(context,listen: false).inistate(suppliers[index]);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

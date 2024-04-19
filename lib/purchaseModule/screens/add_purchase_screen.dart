@@ -3,6 +3,7 @@ import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
+import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/purchaseModule/widget/adding_product_for_purchase.dart';
 import 'package:inventory_app/purchaseModule/widget/sub_product_tile.dart';
 import 'package:provider/provider.dart';
@@ -10,14 +11,17 @@ import 'package:provider/provider.dart';
 class AddPurchaseScreen extends StatefulWidget {
   const AddPurchaseScreen({
     Key? key,
+    required this.supplierModel
   }) : super(key: key);
+
+
+  final SupplierModel supplierModel;
 
   @override
   State<AddPurchaseScreen> createState() => _AddPurchaseScreenState();
 }
 
 class _AddPurchaseScreenState extends State<AddPurchaseScreen> {
- final List<PurchaseSubProduct> _purchaseSubproducts = [];
 
 
   addNewProduct(SubProductModel subProductModel) {
@@ -29,18 +33,19 @@ class _AddPurchaseScreenState extends State<AddPurchaseScreen> {
 
   @override
   void initState() {
+    myInit();
     super.initState();
   }
 
   myInit()async{
-    await Provider.of<InventoryProvider>(context).searchSubProducts("ABC");
+    await Provider.of<InventoryProvider>(context,listen: false).searchSubProducts("");
   }
 
   @override
   Widget build(BuildContext context) {
     final dW = MediaQuery.of(context).size.width;
     final dH = MediaQuery.of(context).size.width;
-    final subProduct = Provider.of<InventoryProvider>(context).subProducts;
+    final subProduct = Provider.of<InventoryProvider>(context).searchedSubProduct;
 
     return Scaffold(
       appBar: CustomAppBar(title: "Add Product"),

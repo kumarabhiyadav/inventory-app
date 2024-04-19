@@ -22,15 +22,12 @@ PurchaseModel _$PurchaseModelFromJson(Map<String, dynamic> json) {
 mixin _$PurchaseModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  double get quantity => throw _privateConstructorUsedError;
-  double get cost => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get unit => throw _privateConstructorUsedError;
+  double get totalCost => throw _privateConstructorUsedError;
+  double get additionalCost => throw _privateConstructorUsedError;
   List<PurchaseSubProduct> get subProdut => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'supplier')
   SupplierModel get supplier => throw _privateConstructorUsedError;
-  bool get is_deleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,14 +43,11 @@ abstract class $PurchaseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      double quantity,
-      double cost,
-      String image,
-      String unit,
+      double totalCost,
+      double additionalCost,
       List<PurchaseSubProduct> subProdut,
       DateTime createdAt,
-      @JsonKey(name: 'supplier') SupplierModel supplier,
-      bool is_deleted});
+      @JsonKey(name: 'supplier') SupplierModel supplier});
 
   $SupplierModelCopyWith<$Res> get supplier;
 }
@@ -72,36 +66,25 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
   @override
   $Res call({
     Object? id = null,
-    Object? quantity = null,
-    Object? cost = null,
-    Object? image = null,
-    Object? unit = null,
+    Object? totalCost = null,
+    Object? additionalCost = null,
     Object? subProdut = null,
     Object? createdAt = null,
     Object? supplier = null,
-    Object? is_deleted = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
+      totalCost: null == totalCost
+          ? _value.totalCost
+          : totalCost // ignore: cast_nullable_to_non_nullable
               as double,
-      cost: null == cost
-          ? _value.cost
-          : cost // ignore: cast_nullable_to_non_nullable
+      additionalCost: null == additionalCost
+          ? _value.additionalCost
+          : additionalCost // ignore: cast_nullable_to_non_nullable
               as double,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      unit: null == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as String,
       subProdut: null == subProdut
           ? _value.subProdut
           : subProdut // ignore: cast_nullable_to_non_nullable
@@ -114,10 +97,6 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
           ? _value.supplier
           : supplier // ignore: cast_nullable_to_non_nullable
               as SupplierModel,
-      is_deleted: null == is_deleted
-          ? _value.is_deleted
-          : is_deleted // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 
@@ -140,14 +119,11 @@ abstract class _$$PurchaseModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      double quantity,
-      double cost,
-      String image,
-      String unit,
+      double totalCost,
+      double additionalCost,
       List<PurchaseSubProduct> subProdut,
       DateTime createdAt,
-      @JsonKey(name: 'supplier') SupplierModel supplier,
-      bool is_deleted});
+      @JsonKey(name: 'supplier') SupplierModel supplier});
 
   @override
   $SupplierModelCopyWith<$Res> get supplier;
@@ -165,36 +141,25 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? quantity = null,
-    Object? cost = null,
-    Object? image = null,
-    Object? unit = null,
+    Object? totalCost = null,
+    Object? additionalCost = null,
     Object? subProdut = null,
     Object? createdAt = null,
     Object? supplier = null,
-    Object? is_deleted = null,
   }) {
     return _then(_$PurchaseModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
+      totalCost: null == totalCost
+          ? _value.totalCost
+          : totalCost // ignore: cast_nullable_to_non_nullable
               as double,
-      cost: null == cost
-          ? _value.cost
-          : cost // ignore: cast_nullable_to_non_nullable
+      additionalCost: null == additionalCost
+          ? _value.additionalCost
+          : additionalCost // ignore: cast_nullable_to_non_nullable
               as double,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      unit: null == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as String,
       subProdut: null == subProdut
           ? _value._subProdut
           : subProdut // ignore: cast_nullable_to_non_nullable
@@ -207,10 +172,6 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
           ? _value.supplier
           : supplier // ignore: cast_nullable_to_non_nullable
               as SupplierModel,
-      is_deleted: null == is_deleted
-          ? _value.is_deleted
-          : is_deleted // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -220,14 +181,11 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
 class _$PurchaseModelImpl implements _PurchaseModel {
   const _$PurchaseModelImpl(
       {@JsonKey(name: '_id') required this.id,
-      required this.quantity,
-      required this.cost,
-      required this.image,
-      required this.unit,
+      required this.totalCost,
+      required this.additionalCost,
       required final List<PurchaseSubProduct> subProdut,
       required this.createdAt,
-      @JsonKey(name: 'supplier') required this.supplier,
-      required this.is_deleted})
+      @JsonKey(name: 'supplier') required this.supplier})
       : _subProdut = subProdut;
 
   factory _$PurchaseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -237,13 +195,9 @@ class _$PurchaseModelImpl implements _PurchaseModel {
   @JsonKey(name: '_id')
   final String id;
   @override
-  final double quantity;
+  final double totalCost;
   @override
-  final double cost;
-  @override
-  final String image;
-  @override
-  final String unit;
+  final double additionalCost;
   final List<PurchaseSubProduct> _subProdut;
   @override
   List<PurchaseSubProduct> get subProdut {
@@ -257,12 +211,10 @@ class _$PurchaseModelImpl implements _PurchaseModel {
   @override
   @JsonKey(name: 'supplier')
   final SupplierModel supplier;
-  @override
-  final bool is_deleted;
 
   @override
   String toString() {
-    return 'PurchaseModel(id: $id, quantity: $quantity, cost: $cost, image: $image, unit: $unit, subProdut: $subProdut, createdAt: $createdAt, supplier: $supplier, is_deleted: $is_deleted)';
+    return 'PurchaseModel(id: $id, totalCost: $totalCost, additionalCost: $additionalCost, subProdut: $subProdut, createdAt: $createdAt, supplier: $supplier)';
   }
 
   @override
@@ -271,34 +223,22 @@ class _$PurchaseModelImpl implements _PurchaseModel {
         (other.runtimeType == runtimeType &&
             other is _$PurchaseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.cost, cost) || other.cost == cost) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.unit, unit) || other.unit == unit) &&
+            (identical(other.totalCost, totalCost) ||
+                other.totalCost == totalCost) &&
+            (identical(other.additionalCost, additionalCost) ||
+                other.additionalCost == additionalCost) &&
             const DeepCollectionEquality()
                 .equals(other._subProdut, _subProdut) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.supplier, supplier) ||
-                other.supplier == supplier) &&
-            (identical(other.is_deleted, is_deleted) ||
-                other.is_deleted == is_deleted));
+                other.supplier == supplier));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      quantity,
-      cost,
-      image,
-      unit,
-      const DeepCollectionEquality().hash(_subProdut),
-      createdAt,
-      supplier,
-      is_deleted);
+  int get hashCode => Object.hash(runtimeType, id, totalCost, additionalCost,
+      const DeepCollectionEquality().hash(_subProdut), createdAt, supplier);
 
   @JsonKey(ignore: true)
   @override
@@ -316,15 +256,13 @@ class _$PurchaseModelImpl implements _PurchaseModel {
 
 abstract class _PurchaseModel implements PurchaseModel {
   const factory _PurchaseModel(
-      {@JsonKey(name: '_id') required final String id,
-      required final double quantity,
-      required final double cost,
-      required final String image,
-      required final String unit,
-      required final List<PurchaseSubProduct> subProdut,
-      required final DateTime createdAt,
-      @JsonKey(name: 'supplier') required final SupplierModel supplier,
-      required final bool is_deleted}) = _$PurchaseModelImpl;
+          {@JsonKey(name: '_id') required final String id,
+          required final double totalCost,
+          required final double additionalCost,
+          required final List<PurchaseSubProduct> subProdut,
+          required final DateTime createdAt,
+          @JsonKey(name: 'supplier') required final SupplierModel supplier}) =
+      _$PurchaseModelImpl;
 
   factory _PurchaseModel.fromJson(Map<String, dynamic> json) =
       _$PurchaseModelImpl.fromJson;
@@ -333,13 +271,9 @@ abstract class _PurchaseModel implements PurchaseModel {
   @JsonKey(name: '_id')
   String get id;
   @override
-  double get quantity;
+  double get totalCost;
   @override
-  double get cost;
-  @override
-  String get image;
-  @override
-  String get unit;
+  double get additionalCost;
   @override
   List<PurchaseSubProduct> get subProdut;
   @override
@@ -347,8 +281,6 @@ abstract class _PurchaseModel implements PurchaseModel {
   @override
   @JsonKey(name: 'supplier')
   SupplierModel get supplier;
-  @override
-  bool get is_deleted;
   @override
   @JsonKey(ignore: true)
   _$$PurchaseModelImplCopyWith<_$PurchaseModelImpl> get copyWith =>
@@ -371,7 +303,6 @@ mixin _$PurchaseSubProduct {
   String get name => throw _privateConstructorUsedError;
   String get unit => throw _privateConstructorUsedError;
   double get quantity => throw _privateConstructorUsedError;
-  bool get isDeleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -392,8 +323,7 @@ abstract class $PurchaseSubProductCopyWith<$Res> {
       @JsonKey(name: 'subproduct') String subproduct,
       @JsonKey(name: 'name') String name,
       String unit,
-      double quantity,
-      bool isDeleted});
+      double quantity});
 }
 
 /// @nodoc
@@ -416,7 +346,6 @@ class _$PurchaseSubProductCopyWithImpl<$Res, $Val extends PurchaseSubProduct>
     Object? name = null,
     Object? unit = null,
     Object? quantity = null,
-    Object? isDeleted = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -447,10 +376,6 @@ class _$PurchaseSubProductCopyWithImpl<$Res, $Val extends PurchaseSubProduct>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double,
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -470,8 +395,7 @@ abstract class _$$PurchaseSubProductImplCopyWith<$Res>
       @JsonKey(name: 'subproduct') String subproduct,
       @JsonKey(name: 'name') String name,
       String unit,
-      double quantity,
-      bool isDeleted});
+      double quantity});
 }
 
 /// @nodoc
@@ -492,7 +416,6 @@ class __$$PurchaseSubProductImplCopyWithImpl<$Res>
     Object? name = null,
     Object? unit = null,
     Object? quantity = null,
-    Object? isDeleted = null,
   }) {
     return _then(_$PurchaseSubProductImpl(
       id: null == id
@@ -523,10 +446,6 @@ class __$$PurchaseSubProductImplCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double,
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -541,8 +460,7 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
       @JsonKey(name: 'subproduct') required this.subproduct,
       @JsonKey(name: 'name') required this.name,
       required this.unit,
-      required this.quantity,
-      required this.isDeleted});
+      required this.quantity});
 
   factory _$PurchaseSubProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$PurchaseSubProductImplFromJson(json);
@@ -564,12 +482,10 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
   final String unit;
   @override
   final double quantity;
-  @override
-  final bool isDeleted;
 
   @override
   String toString() {
-    return 'PurchaseSubProduct(id: $id, cost: $cost, image: $image, subproduct: $subproduct, name: $name, unit: $unit, quantity: $quantity, isDeleted: $isDeleted)';
+    return 'PurchaseSubProduct(id: $id, cost: $cost, image: $image, subproduct: $subproduct, name: $name, unit: $unit, quantity: $quantity)';
   }
 
   @override
@@ -585,15 +501,13 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.isDeleted, isDeleted) ||
-                other.isDeleted == isDeleted));
+                other.quantity == quantity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, cost, image, subproduct,
-      name, unit, quantity, isDeleted);
+  int get hashCode => Object.hash(
+      runtimeType, id, cost, image, subproduct, name, unit, quantity);
 
   @JsonKey(ignore: true)
   @override
@@ -618,8 +532,7 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
       @JsonKey(name: 'subproduct') required final String subproduct,
       @JsonKey(name: 'name') required final String name,
       required final String unit,
-      required final double quantity,
-      required final bool isDeleted}) = _$PurchaseSubProductImpl;
+      required final double quantity}) = _$PurchaseSubProductImpl;
 
   factory _PurchaseSubProduct.fromJson(Map<String, dynamic> json) =
       _$PurchaseSubProductImpl.fromJson;
@@ -641,8 +554,6 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
   String get unit;
   @override
   double get quantity;
-  @override
-  bool get isDeleted;
   @override
   @JsonKey(ignore: true)
   _$$PurchaseSubProductImplCopyWith<_$PurchaseSubProductImpl> get copyWith =>

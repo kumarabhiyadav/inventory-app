@@ -8,6 +8,7 @@ import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/name_tile.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
 import 'package:inventory_app/commonWidgets/snack_bar.dart';
+import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:provider/provider.dart';
 
 
@@ -63,7 +64,7 @@ class _ProductScreenState extends State<ProductScreen> {
         )),
         itemCount: products.length,
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton:Provider.of<PurchaseProvider>(context).currentPurchaseModel!=null? null: FloatingActionButton.extended(
           onPressed: () {
             showModalBottomSheet(
                 shape: const RoundedRectangleBorder(

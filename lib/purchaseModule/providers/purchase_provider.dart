@@ -12,11 +12,8 @@ class PurchaseProvider with ChangeNotifier {
   List<SalesModel> _sales = [];
   List<SalesModel> get sales => [..._sales];
   PurchaseModel? currentPurchaseModel;
-  List<PurchaseModel> purchase = [
-   
-  ];
+  List<PurchaseModel> purchase = [];
 
- 
   createSales({required Map<String, String> body}) async {
     final responseBody = await HttpService.postRequest(
         getEndPoint('createSales'), json.encode(body));
@@ -38,10 +35,38 @@ class PurchaseProvider with ChangeNotifier {
   }
 
   inistate(SupplierModel supplier) {
-    
+    currentPurchaseModel = PurchaseModel(
+        additionalCost: 0.0,
+        id: '',
+        createdAt: DateTime.now(),
+        subProdut: [],
+        supplier: supplier,
+        totalCost: 0.0);
+    print(currentPurchaseModel);
   }
 
-  addSubProduct(SubProductModel subProductModel) {}
+  addSubProductForPurchase(PurchaseSubProduct purchaseSubProduct) {
+    List<PurchaseSubProduct> subproducts = [...currentPurchaseModel!.subProdut];
+    subproducts.add(purchaseSubProduct);
+    currentPurchaseModel =
+        currentPurchaseModel!.copyWith(subProdut: subproducts);
+    notifyListeners();
+  }
 
-  deleteSubProduct(SubProductModel subProductModel) {}
+  deleteSubProductForPurchase(PurchaseSubProduct purchaseSubProduct) {
+    List<PurchaseSubProduct> subproducts = [...currentPurchaseModel!.subProdut];
+    subproducts
+        .removeWhere((p) => p.subproduct == purchaseSubProduct.subproduct);
+    currentPurchaseModel =
+        currentPurchaseModel!.copyWith(subProdut: subproducts);
+    notifyListeners();
+  }
+
+  createPurchase() async {
+ 
+  
+
+
+
+  }
 }

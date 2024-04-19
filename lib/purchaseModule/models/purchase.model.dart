@@ -9,16 +9,11 @@ part 'purchase.model.g.dart';
 class PurchaseModel with _$PurchaseModel {
   const factory PurchaseModel({
   @JsonKey(name: '_id') required final String id,
-  required final double quantity,
-  required final double cost,
-  required final String image,
-  required final String unit,
+  required final double totalCost,
+  required final double additionalCost,
   required final List<PurchaseSubProduct> subProdut, 
   required final DateTime createdAt,
-
   @JsonKey(name: 'supplier') required SupplierModel supplier,
-  required final bool is_deleted,
-
   }) = _PurchaseModel;
 
   factory PurchaseModel.fromJson(Map<String, dynamic> json) =>
@@ -35,9 +30,7 @@ class PurchaseSubProduct with _$PurchaseSubProduct {
   @JsonKey(name: 'subproduct') required String subproduct,
   @JsonKey(name: 'name') required String name,
   required  String unit,
-  required  double quantity,
-  required  bool isDeleted,
-  
+  required  double quantity,  
 
   }) = _PurchaseSubProduct;
 
