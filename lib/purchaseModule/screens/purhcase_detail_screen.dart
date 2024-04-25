@@ -7,7 +7,7 @@ import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
 import '../../colors.dart';
 
 class PurchaseDetailScreen extends StatefulWidget {
-  PurchaseDetailScreen({Key? key, required this.purchaseModel})
+  const PurchaseDetailScreen({Key? key, required this.purchaseModel})
       : super(key: key);
   final PurchaseModel purchaseModel;
 
@@ -51,8 +51,8 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     Text(
-                      DateFormat('dd MMM yyyy hh:mm a')
-                          .format(widget.purchaseModel.createdAt),
+                      DateFormat('dd MMM yyyy')
+                          .format(widget.purchaseModel.purchaseDate),
                       style: Theme.of(context)
                           .textTheme
                           .headline5!
@@ -76,10 +76,8 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   height: 5,
                 ),
                 Text(
-                  // widget.purchaseModel
-                  //     .getTotalOfSubProducts()
-                  //     .toStringAsFixed(2),
-                  "",
+                  widget.purchaseModel.totalCost.toStringAsFixed(2),
+                  // "",
                   style: Theme.of(context)
                       .textTheme
                       .headline4!
@@ -88,49 +86,49 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
               ],
             ),
             const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Extra Cost',
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  // widget.purchaseModel.additionalCost.toStringAsFixed(2),
-                  "",
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                      color: Colors.red.withOpacity(0.7),
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Grand Total',
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  // (widget.purchaseModel.additionalCost +
-                  //         widget.purchaseModel.getTotalOfSubProducts())
-                  //     .toStringAsFixed(2),
-                  "",
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Extra Cost',
+            //       style: Theme.of(context).textTheme.subtitle1,
+            //     ),
+            //     const SizedBox(
+            //       height: 5,
+            //     ),
+            //     Text(
+            //       // widget.purchaseModel.additionalCost.toStringAsFixed(2),
+            //       "",
+            //       style: Theme.of(context).textTheme.subtitle2!.copyWith(
+            //           color: Colors.red.withOpacity(0.7),
+            //           fontWeight: FontWeight.w600),
+            //     ),
+            //   ],
+            // ),
+            // const Divider(),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Grand Total',
+            //       style: Theme.of(context).textTheme.subtitle1,
+            //     ),
+            //     const SizedBox(
+            //       height: 5,
+            //     ),
+            //     Text(
+            //       // (widget.purchaseModel.additionalCost +
+            //       //         widget.purchaseModel.getTotalOfSubProducts())
+            //       //     .toStringAsFixed(2),
+            //       "",
+            //       style: Theme.of(context).textTheme.headline4,
+            //     ),
+            //   ],
+            // ),
             SizedBox(
               height: dW * 0.05,
             ),
-            ...widget.purchaseModel.subProdut.map((sub) => Container(
+            ...widget.purchaseModel.subProducts.map((sub) => Container(
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.8, color: Colors.black12),
                       color: Colors.white,
@@ -155,7 +153,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                sub.image,
+                                sub.name,
                                 style: Theme.of(context).textTheme.headline4,
                               ),
                               Text(
@@ -178,13 +176,22 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                     fit: BoxFit.fill,
                                     color: iconColor,
                                   )
-                                : ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      sub.image,
-                                      height: 40,
-                                      width: 40,
-                                      fit: BoxFit.fill,
+                                : GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShowImage(title: sub.name,url: sub.image)));
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
+                                        sub.image,
+                                        height: 40,
+                                        width: 40,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                           ),
@@ -199,16 +206,15 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Quanity'),
-                              Text(sub.quantity.toStringAsFixed(2)),
+                              const Text('Rate per unit'),
+                              Text((sub.cost).toStringAsFixed(2)),
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Rate per unit'),
-                              Text(
-                                  (sub.cost / sub.quantity).toStringAsFixed(2)),
+                              const Text('Quanity'),
+                              Text(sub.quantity.toStringAsFixed(2)),
                             ],
                           ),
                           Column(
@@ -219,20 +225,8 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                               //     .rateWithExtraCost(subProduct: sub)
                               //     .toStringAsFixed(2)),m
 
-                              Text('data'),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Text('Total'),
                               Text(
-                                // (widget.purchaseModel
-                                //           .rateWithExtraCost(subProduct: sub) *
-                                //       sub.quantity)
-                                //   .toStringAsFixed(2)
-                                ""
-                                  ),
+                                  (sub.quantity * sub.cost).toStringAsFixed(2)),
                             ],
                           ),
                         ],
@@ -244,5 +238,19 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
         ),
       ),
     );
+  }
+}
+
+class ShowImage extends StatelessWidget {
+  const ShowImage({super.key, required this.url,required this.title});
+  final String url;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(title: title ),
+        body: Container(
+            color: Colors.white, child: Center(child: Image.network(url))));
   }
 }

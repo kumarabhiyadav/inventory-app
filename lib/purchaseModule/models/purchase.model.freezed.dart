@@ -24,8 +24,9 @@ mixin _$PurchaseModel {
   String get id => throw _privateConstructorUsedError;
   double get totalCost => throw _privateConstructorUsedError;
   double get additionalCost => throw _privateConstructorUsedError;
-  List<PurchaseSubProduct> get subProdut => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  List<PurchaseSubProduct> get subProducts =>
+      throw _privateConstructorUsedError;
+  DateTime get purchaseDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'supplier')
   SupplierModel get supplier => throw _privateConstructorUsedError;
 
@@ -45,8 +46,8 @@ abstract class $PurchaseModelCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       double totalCost,
       double additionalCost,
-      List<PurchaseSubProduct> subProdut,
-      DateTime createdAt,
+      List<PurchaseSubProduct> subProducts,
+      DateTime purchaseDate,
       @JsonKey(name: 'supplier') SupplierModel supplier});
 
   $SupplierModelCopyWith<$Res> get supplier;
@@ -68,8 +69,8 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
     Object? id = null,
     Object? totalCost = null,
     Object? additionalCost = null,
-    Object? subProdut = null,
-    Object? createdAt = null,
+    Object? subProducts = null,
+    Object? purchaseDate = null,
     Object? supplier = null,
   }) {
     return _then(_value.copyWith(
@@ -85,13 +86,13 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
           ? _value.additionalCost
           : additionalCost // ignore: cast_nullable_to_non_nullable
               as double,
-      subProdut: null == subProdut
-          ? _value.subProdut
-          : subProdut // ignore: cast_nullable_to_non_nullable
+      subProducts: null == subProducts
+          ? _value.subProducts
+          : subProducts // ignore: cast_nullable_to_non_nullable
               as List<PurchaseSubProduct>,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      purchaseDate: null == purchaseDate
+          ? _value.purchaseDate
+          : purchaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       supplier: null == supplier
           ? _value.supplier
@@ -121,8 +122,8 @@ abstract class _$$PurchaseModelImplCopyWith<$Res>
       {@JsonKey(name: '_id') String id,
       double totalCost,
       double additionalCost,
-      List<PurchaseSubProduct> subProdut,
-      DateTime createdAt,
+      List<PurchaseSubProduct> subProducts,
+      DateTime purchaseDate,
       @JsonKey(name: 'supplier') SupplierModel supplier});
 
   @override
@@ -143,8 +144,8 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? totalCost = null,
     Object? additionalCost = null,
-    Object? subProdut = null,
-    Object? createdAt = null,
+    Object? subProducts = null,
+    Object? purchaseDate = null,
     Object? supplier = null,
   }) {
     return _then(_$PurchaseModelImpl(
@@ -160,13 +161,13 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
           ? _value.additionalCost
           : additionalCost // ignore: cast_nullable_to_non_nullable
               as double,
-      subProdut: null == subProdut
-          ? _value._subProdut
-          : subProdut // ignore: cast_nullable_to_non_nullable
+      subProducts: null == subProducts
+          ? _value._subProducts
+          : subProducts // ignore: cast_nullable_to_non_nullable
               as List<PurchaseSubProduct>,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      purchaseDate: null == purchaseDate
+          ? _value.purchaseDate
+          : purchaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       supplier: null == supplier
           ? _value.supplier
@@ -183,10 +184,10 @@ class _$PurchaseModelImpl implements _PurchaseModel {
       {@JsonKey(name: '_id') required this.id,
       required this.totalCost,
       required this.additionalCost,
-      required final List<PurchaseSubProduct> subProdut,
-      required this.createdAt,
+      required final List<PurchaseSubProduct> subProducts,
+      required this.purchaseDate,
       @JsonKey(name: 'supplier') required this.supplier})
-      : _subProdut = subProdut;
+      : _subProducts = subProducts;
 
   factory _$PurchaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PurchaseModelImplFromJson(json);
@@ -198,23 +199,23 @@ class _$PurchaseModelImpl implements _PurchaseModel {
   final double totalCost;
   @override
   final double additionalCost;
-  final List<PurchaseSubProduct> _subProdut;
+  final List<PurchaseSubProduct> _subProducts;
   @override
-  List<PurchaseSubProduct> get subProdut {
-    if (_subProdut is EqualUnmodifiableListView) return _subProdut;
+  List<PurchaseSubProduct> get subProducts {
+    if (_subProducts is EqualUnmodifiableListView) return _subProducts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subProdut);
+    return EqualUnmodifiableListView(_subProducts);
   }
 
   @override
-  final DateTime createdAt;
+  final DateTime purchaseDate;
   @override
   @JsonKey(name: 'supplier')
   final SupplierModel supplier;
 
   @override
   String toString() {
-    return 'PurchaseModel(id: $id, totalCost: $totalCost, additionalCost: $additionalCost, subProdut: $subProdut, createdAt: $createdAt, supplier: $supplier)';
+    return 'PurchaseModel(id: $id, totalCost: $totalCost, additionalCost: $additionalCost, subProducts: $subProducts, purchaseDate: $purchaseDate, supplier: $supplier)';
   }
 
   @override
@@ -228,17 +229,23 @@ class _$PurchaseModelImpl implements _PurchaseModel {
             (identical(other.additionalCost, additionalCost) ||
                 other.additionalCost == additionalCost) &&
             const DeepCollectionEquality()
-                .equals(other._subProdut, _subProdut) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
+                .equals(other._subProducts, _subProducts) &&
+            (identical(other.purchaseDate, purchaseDate) ||
+                other.purchaseDate == purchaseDate) &&
             (identical(other.supplier, supplier) ||
                 other.supplier == supplier));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, totalCost, additionalCost,
-      const DeepCollectionEquality().hash(_subProdut), createdAt, supplier);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      totalCost,
+      additionalCost,
+      const DeepCollectionEquality().hash(_subProducts),
+      purchaseDate,
+      supplier);
 
   @JsonKey(ignore: true)
   @override
@@ -259,8 +266,8 @@ abstract class _PurchaseModel implements PurchaseModel {
           {@JsonKey(name: '_id') required final String id,
           required final double totalCost,
           required final double additionalCost,
-          required final List<PurchaseSubProduct> subProdut,
-          required final DateTime createdAt,
+          required final List<PurchaseSubProduct> subProducts,
+          required final DateTime purchaseDate,
           @JsonKey(name: 'supplier') required final SupplierModel supplier}) =
       _$PurchaseModelImpl;
 
@@ -275,9 +282,9 @@ abstract class _PurchaseModel implements PurchaseModel {
   @override
   double get additionalCost;
   @override
-  List<PurchaseSubProduct> get subProdut;
+  List<PurchaseSubProduct> get subProducts;
   @override
-  DateTime get createdAt;
+  DateTime get purchaseDate;
   @override
   @JsonKey(name: 'supplier')
   SupplierModel get supplier;

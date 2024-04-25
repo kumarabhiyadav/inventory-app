@@ -11,8 +11,8 @@ class PurchaseModel with _$PurchaseModel {
   @JsonKey(name: '_id') required final String id,
   required final double totalCost,
   required final double additionalCost,
-  required final List<PurchaseSubProduct> subProdut, 
-  required final DateTime createdAt,
+  required final List<PurchaseSubProduct> subProducts, 
+  required final DateTime purchaseDate,
   @JsonKey(name: 'supplier') required SupplierModel supplier,
   }) = _PurchaseModel;
 

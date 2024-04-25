@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/screens/category_screen.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
+import 'package:inventory_app/commonWidgets/secondary_button.dart';
+import 'package:inventory_app/commonWidgets/snack_bar.dart';
+import 'package:inventory_app/commonWidgets/toastmessage.dart';
 import 'package:inventory_app/home/home_screen.dart';
 import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
@@ -33,7 +38,7 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
           child: InkWell(
             onTap: () {
               // Navigator.pop(context);
-              
+
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -56,19 +61,27 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
         ),
       ),
       body: purchaseModel != null
-          ? purchaseModel.subProdut.isNotEmpty
+          ? purchaseModel.subProducts.isNotEmpty
               ? Column(children: [
-                  ...purchaseModel.subProdut.map((e) => Container(
+                  ...purchaseModel.subProducts.map((e) => Container(
                         margin: EdgeInsets.symmetric(horizontal: dW * 0.05),
                         child: ListTile(
                           contentPadding: EdgeInsets.zero,
                           leading: Container(
                             height: dW * 0.12,
                             width: dW * 0.12,
-                            child: null,
+                            // padding: EdgeInsets.all(2),
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.black12),
                                 borderRadius: BorderRadius.circular(8)),
+                            child: e.image != ""
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.file(
+                                      File(e.image),
+                                      fit: BoxFit.fill,
+                                    ))
+                                : const Icon(Icons.image_not_supported_rounded),
                           ),
                           title: Text(e.name),
                           subtitle: Row(
@@ -87,31 +100,58 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
                               Icons.delete_forever_sharp,
                               color: Colors.red,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Provider.of<PurchaseProvider>(context,
+                                      listen: false)
+                                  .deleteSubProductForPurchase(e);
+                            },
                           ),
                         ),
                       ))
                 ])
               : null
           : null,
-      floatingActionButton: PrimaryButton(
-        function: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => AddPurchaseScreen(
-          //               supplierModel: widget.supplierModel,
-          //             )));
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CategoryScreen()));
-        },
-        height: dW * 0.12,
-        width: dW * .9,
-        title: "New Product",
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PrimaryButton(
+            function: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CategoryScreen()));
+            },
+            height: dW * 0.12,
+            width: dW * .9,
+            title: "New Product",
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            height: dW * 0.025,
+          ),
+          SecondaryButton(
+              function: () {
+                //
+
+                if (Provider.of<PurchaseProvider>(context, listen: false)
+                    .currentPurchaseModel!
+                    .subProducts
+                    .isEmpty) {
+                  showToast(message: "Please choose products first");
+                  return;
+                }
+
+                print(Provider.of<PurchaseProvider>(context, listen: false)
+                    .createPurchase());
+              },
+              height: dW * 0.12,
+              width: dW * .9,
+              title: "Save",
+              icon: null),
+        ],
       ),
     );
   }

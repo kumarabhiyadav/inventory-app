@@ -38,35 +38,72 @@ class PurchaseProvider with ChangeNotifier {
     currentPurchaseModel = PurchaseModel(
         additionalCost: 0.0,
         id: '',
-        createdAt: DateTime.now(),
-        subProdut: [],
+        purchaseDate: DateTime.now(),
+        subProducts: [],
         supplier: supplier,
         totalCost: 0.0);
     print(currentPurchaseModel);
   }
 
   addSubProductForPurchase(PurchaseSubProduct purchaseSubProduct) {
-    List<PurchaseSubProduct> subproducts = [...currentPurchaseModel!.subProdut];
+    List<PurchaseSubProduct> subproducts = [
+      ...currentPurchaseModel!.subProducts
+    ];
     subproducts.add(purchaseSubProduct);
+    currentPurchaseModel = currentPurchaseModel!.copyWith(
+        totalCost: currentPurchaseModel!.totalCost +( purchaseSubProduct.quantity * purchaseSubProduct.cost));
     currentPurchaseModel =
-        currentPurchaseModel!.copyWith(subProdut: subproducts);
+        currentPurchaseModel!.copyWith(subProducts: subproducts);
     notifyListeners();
   }
 
   deleteSubProductForPurchase(PurchaseSubProduct purchaseSubProduct) {
-    List<PurchaseSubProduct> subproducts = [...currentPurchaseModel!.subProdut];
+    List<PurchaseSubProduct> subproducts = [
+      ...currentPurchaseModel!.subProducts
+    ];
+    currentPurchaseModel = currentPurchaseModel!.copyWith(
+        totalCost: currentPurchaseModel!.totalCost -
+            (purchaseSubProduct.quantity * purchaseSubProduct.cost));
+
     subproducts
         .removeWhere((p) => p.subproduct == purchaseSubProduct.subproduct);
     currentPurchaseModel =
-        currentPurchaseModel!.copyWith(subProdut: subproducts);
+        currentPurchaseModel!.copyWith(subProducts: subproducts);
     notifyListeners();
   }
 
   createPurchase() async {
- 
-  
+    Map<String, dynamic> body = {};
+    Map<String, String> images = {};
 
+    if (currentPurchaseModel != null) {
+      for (var subproduct in currentPurchaseModel!.subProducts) {
+        if (subproduct.image != "") {
+          images[subproduct.subproduct] = subproduct.image;
+        }
+      }
+    }
+    final respone = await HttpService.postWithFiles(
+        getEndPoint('createPurchase'),
+        jsonEncode(currentPurchaseModel!.toJson()),
+        images);
+  }
 
+  fetchPurchases() async {
+    purchase = [];
+    final response = await HttpService.getRequest(getEndPoint('fetchPurchase'));
+
+    if (response != null) {
+      response['result']
+          .forEach((e) => {purchase.add(PurchaseModel.fromJson(e))});
+      notifyListeners();
+    }
+  }
+
+  deletePurchase(id) async{
+
+    final response =  await HttpService.delete('${getEndPoint('deletePurchase')}/'+id);
+    print(response);
 
   }
 }

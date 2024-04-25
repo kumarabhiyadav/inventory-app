@@ -1,7 +1,7 @@
 // const domain =  "http://192.168.0.106:6001";
-const domain = "http://127.0.0.1:6001";
+// const domain = "http://127.0.0.1:6001";
 
-// const domain = "http://13.60.46.80:6001";
+const domain = "http://13.60.46.80:6001";
 
 
 
@@ -22,6 +22,12 @@ const endPoints = {
 
 
   'searchSubProducts' : 'inventory/searchSubProducts',
+
+  'createPurchase' : 'inventory/createPurchase',
+
+  'fetchPurchase'  : 'inventory/fetchPurchase',
+
+  'deletePurchase'  : 'inventory/deletePurchase',
 
 
 

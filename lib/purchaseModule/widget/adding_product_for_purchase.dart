@@ -45,6 +45,7 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+        print(_image);
       } else {
         print('No image selected.');
       }
@@ -143,7 +144,10 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.black12),
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
-              child: const Icon(Icons.camera_alt),
+              // child: _image!=null?  const Icon(Icons.camera_alt),
+              child: _image!=null?ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                            child: Image.file(File(_image!.path),fit: BoxFit.fill,)): const Icon(Icons.camera_alt),
             ),
           ),
           SizedBox(
@@ -155,7 +159,7 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                     .addSubProductForPurchase(PurchaseSubProduct(
                         id: "",
                         cost: double.parse(_costController.text),
-                        image: "",
+                        image: _image!=null ?_image!.path : "",
                         subproduct: widget.subProductModel.id,
                         name: widget.subProductModel.name,
                         unit: selectedUnit,

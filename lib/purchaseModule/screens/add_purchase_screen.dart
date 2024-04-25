@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
-import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
 import 'package:inventory_app/purchaseModule/models/supplier.model.dart';
 import 'package:inventory_app/purchaseModule/widget/adding_product_for_purchase.dart';
 import 'package:inventory_app/purchaseModule/widget/sub_product_tile.dart';

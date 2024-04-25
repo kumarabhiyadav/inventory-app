@@ -11,10 +11,10 @@ _$PurchaseModelImpl _$$PurchaseModelImplFromJson(Map<String, dynamic> json) =>
       id: json['_id'] as String,
       totalCost: (json['totalCost'] as num).toDouble(),
       additionalCost: (json['additionalCost'] as num).toDouble(),
-      subProdut: (json['subProdut'] as List<dynamic>)
+      subProducts: (json['subProducts'] as List<dynamic>)
           .map((e) => PurchaseSubProduct.fromJson(e as Map<String, dynamic>))
           .toList(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      purchaseDate: DateTime.parse(json['purchaseDate'] as String),
       supplier:
           SupplierModel.fromJson(json['supplier'] as Map<String, dynamic>),
     );
@@ -24,8 +24,8 @@ Map<String, dynamic> _$$PurchaseModelImplToJson(_$PurchaseModelImpl instance) =>
       '_id': instance.id,
       'totalCost': instance.totalCost,
       'additionalCost': instance.additionalCost,
-      'subProdut': instance.subProdut,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'subProducts': instance.subProducts,
+      'purchaseDate': instance.purchaseDate.toIso8601String(),
       'supplier': instance.supplier,
     };
 
