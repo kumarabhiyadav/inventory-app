@@ -13,6 +13,7 @@ class PurchaseProvider with ChangeNotifier {
   List<SalesModel> get sales => [..._sales];
   PurchaseModel? currentPurchaseModel;
   List<PurchaseModel> purchase = [];
+  List<dynamic> subProductpurchase = [];
 
   createSales({required Map<String, String> body}) async {
     final responseBody = await HttpService.postRequest(
@@ -51,7 +52,8 @@ class PurchaseProvider with ChangeNotifier {
     ];
     subproducts.add(purchaseSubProduct);
     currentPurchaseModel = currentPurchaseModel!.copyWith(
-        totalCost: currentPurchaseModel!.totalCost +( purchaseSubProduct.quantity * purchaseSubProduct.cost));
+        totalCost: currentPurchaseModel!.totalCost +
+            (purchaseSubProduct.quantity * purchaseSubProduct.cost));
     currentPurchaseModel =
         currentPurchaseModel!.copyWith(subProducts: subproducts);
     notifyListeners();
@@ -87,6 +89,12 @@ class PurchaseProvider with ChangeNotifier {
         getEndPoint('createPurchase'),
         jsonEncode(currentPurchaseModel!.toJson()),
         images);
+
+    if (respone != null) {
+      currentPurchaseModel = null;
+      return respone;
+    }
+    return null;
   }
 
   fetchPurchases() async {
@@ -100,10 +108,22 @@ class PurchaseProvider with ChangeNotifier {
     }
   }
 
-  deletePurchase(id) async{
-
-    final response =  await HttpService.delete('${getEndPoint('deletePurchase')}/'+id);
+  deletePurchase(id) async {
+    final response =
+        await HttpService.delete('${getEndPoint('deletePurchase')}/' + id);
     print(response);
+  }
 
+  fetchSubProductPurchases({required String id}) async {
+    subProductpurchase = [];
+
+    print("${getEndPoint('fetchSubProductPurchase')}/$id");
+    final response = await HttpService.getRequest(
+        "${getEndPoint('fetchSubProductPurchase')}/$id");
+
+    if (response != null) {
+      response['result'].forEach((e) => {subProductpurchase.add(e)});
+      notifyListeners();
+    }
   }
 }

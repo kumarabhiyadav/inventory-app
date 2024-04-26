@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:inventory_app/commonWidgets/toastmessage.dart';
 
 class HttpService {
   static Map<String, String> headers = {
@@ -57,8 +58,12 @@ class HttpService {
 
       if (response.statusCode == 200) {
         print('File uploaded successfully');
+
+        return response;
       } else {
         // Handle errors
+        showToast(message: "Failed to create purchase ");
+        return null;
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {

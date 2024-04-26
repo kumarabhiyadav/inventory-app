@@ -133,7 +133,7 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
             height: dW * 0.025,
           ),
           SecondaryButton(
-              function: () {
+              function: () async {
                 //
 
                 if (Provider.of<PurchaseProvider>(context, listen: false)
@@ -144,8 +144,18 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
                   return;
                 }
 
-                print(Provider.of<PurchaseProvider>(context, listen: false)
-                    .createPurchase());
+                final response =
+                    await Provider.of<PurchaseProvider>(context, listen: false)
+                        .createPurchase();
+
+                if (response != null) {
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                      (route) => false);
+                }
               },
               height: dW * 0.12,
               width: dW * .9,

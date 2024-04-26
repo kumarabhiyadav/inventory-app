@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
+import 'package:inventory_app/InventoryModule/screens/sub_product_purchase_screen.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/name_tile.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
@@ -64,7 +65,10 @@ class _SubProductScreenState extends State<SubProductScreen> {
                                     subProductModel: subProducts[index],
                                   ));
                         }
-                      : () {},
+                      : () {
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SubProductPurchase(subProductModel: subProducts[index],)));
+                      },
               child: Nametile(
                 icon: subProducts[index].imagePath,
                 name: subProducts[index].name,
