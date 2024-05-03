@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
+import 'package:inventory_app/commonWidgets/common_functions.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/purhcase_detail_screen.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,8 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
         Provider.of<PurchaseProvider>(context).subProductpurchase;
     return Scaffold(
       appBar: CustomAppBar(title: widget.subProductModel.name),
-      body: ListView.builder(
+      body: ListView.separated(
+        separatorBuilder: ((context, index) => const Divider(color: Colors.transparent,)),
         itemBuilder: (context, index) => Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), border: Border.all()),
@@ -54,53 +56,112 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
               SizedBox(
                 height: dW * 0.02,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Quantity"),
-                      Text(subproductPurchase[index]['quantity'].toString()),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Quantity"),
+                          Text(
+                              subproductPurchase[index]['quantity'].toString()),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Rate Per Unit"),
+                          Text(double.parse(
+                                  subproductPurchase[index]['cost'].toString())
+                              .toStringAsFixed(2))
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Total"),
+                          Text((double.parse(subproductPurchase[index]
+                                          ['quantity']
+                                      .toString()) *
+                                  double.parse(subproductPurchase[index]['cost']
+                                      .toString()))
+                              .toStringAsFixed(2)),
+                        ],
+                      ),
+                      SizedBox(
+                          height: dW * 0.1,
+                          width: dW * 0.1,
+                          child: subproductPurchase[index]['image'] != null
+                              ? const Icon(Icons.image_not_supported_rounded)
+                              : GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ShowImage(
+                                                url: subproductPurchase[index]
+                                                    ['image'],
+                                                title: widget
+                                                    .subProductModel.name)));
+                                  },
+                                  child: Image.network(
+                                      subproductPurchase[index]['image'])))
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Rate Per Unit"),
-                      Text(double.parse(
-                              subproductPurchase[index]['cost'].toString())
-                          .toStringAsFixed(2))
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('MRP'),
+                          Text(
+                            (calculateNumberWithPercentage(
+                                    (subproductPurchase[index]['cost'] as int)
+                                        .toDouble(), // Convert int to double
+                                    (subproductPurchase[index]
+                                            ['purchasePercent'] as int)
+                                        .toDouble())) // Convert int to double
+                                .toStringAsFixed(2),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('MRP %'),
+                          Text((subproductPurchase[index]['purchasePercent'])
+                              .toStringAsFixed(2)),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Selling %'),
+                          Text((subproductPurchase[index]['salesPercent'])
+                              .toStringAsFixed(2)),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text('Selling Price'),
+                          Text(
+                            (calculateNumberWithPercentage(
+                                    (subproductPurchase[index]['cost'] as int)
+                                        .toDouble(), // Cast to int then to double
+                                    (subproductPurchase[index]['salesPercent']
+                                            as int)
+                                        .toDouble())) // Cast to int then to double
+                                .toStringAsFixed(2),
+                          ),
+                        ],
+                      ),
                     ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text("Total"),
-                      Text((double.parse(subproductPurchase[index]['quantity']
-                                  .toString()) *
-                              double.parse(
-                                  subproductPurchase[index]['cost'].toString()))
-                          .toStringAsFixed(2)),
-                    ],
-                  ),
-                  SizedBox(
-                      height: dW * 0.1,
-                      width: dW * 0.1,
-                      child: subproductPurchase[index]['image'] != null
-                          ? const Icon(Icons.image_not_supported_rounded)
-                          : GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShowImage(
-                                            url: subproductPurchase[index]['image'],
-                                            title:
-                                                widget.subProductModel.name)));
-                              },
-                              child: Image.network(
-                                  subproductPurchase[index]['image'])))
+                  )
                 ],
               ),
             ],

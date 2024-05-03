@@ -39,6 +39,8 @@ _$PurchaseSubProductImpl _$$PurchaseSubProductImplFromJson(
       name: json['name'] as String,
       unit: json['unit'] as String,
       quantity: (json['quantity'] as num).toDouble(),
+      purchasePercent: (json['purchasePercent'] as num).toDouble(),
+      salesPercent: (json['salesPercent'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$PurchaseSubProductImplToJson(
@@ -51,4 +53,6 @@ Map<String, dynamic> _$$PurchaseSubProductImplToJson(
       'name': instance.name,
       'unit': instance.unit,
       'quantity': instance.quantity,
+      'purchasePercent': instance.purchasePercent,
+      'salesPercent': instance.salesPercent,
     };

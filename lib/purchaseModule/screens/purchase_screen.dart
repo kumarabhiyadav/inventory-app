@@ -160,6 +160,7 @@ class PurchaseWidget extends StatelessWidget {
             width: double.infinity,
             child: Wrap(
               spacing: 10,
+              runSpacing: 10,
               children: [
                 ...purchases.subProducts.map((e) => Container(
                     padding: EdgeInsets.all(dW * 0.01),
@@ -167,7 +168,7 @@ class PurchaseWidget extends StatelessWidget {
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(8)),
                     child: Text(
-                      "${e.name} (${e.quantity.toStringAsFixed(0)})",
+                      "${e.name} (${e.quantity.toStringAsFixed(0)} X ${e.cost.toStringAsFixed(2)} ) ",
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall!

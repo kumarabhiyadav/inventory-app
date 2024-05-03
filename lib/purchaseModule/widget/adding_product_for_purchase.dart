@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
+import 'package:inventory_app/commonWidgets/common_functions.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
+import 'package:inventory_app/commonWidgets/toastmessage.dart';
 import 'package:inventory_app/purchaseModule/models/purchase.model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/show_added_purchase_products.dart';
@@ -23,7 +25,11 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
   String selectedUnit = "Meter";
   final TextEditingController _costController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _mrpController = TextEditingController();
+  final TextEditingController _salesController = TextEditingController();
 
+  String mrpMessage = "";
+  String sellingMessage = "";
 
   File? _image;
   final picker = ImagePicker();
@@ -39,7 +45,6 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
     });
   }
 
-
   Future getImageFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
@@ -50,6 +55,26 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
         print('No image selected.');
       }
     });
+  }
+
+ 
+
+  bool checkPercentageOfMRPandSells() {
+    if (_mrpController.text.isEmpty) {
+      return false;
+    }
+
+    double? mrp = double.tryParse(_mrpController.text);
+    if (mrp != null) {
+      double? cost = double.tryParse(_costController.text);
+      double? sales = double.tryParse(_salesController.text);
+
+      if (cost != null && sales != null) {
+        return mrp <= calculateNumberWithPercentage(cost, sales);
+      }
+    }
+
+    return false;
   }
 
   @override
@@ -132,6 +157,78 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                 filled: true,
                 hintText: "Quantity"),
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Text("MRP"),
+          const SizedBox(
+            height: 5,
+          ),
+          TextFormField(
+            controller: _mrpController,
+            onChanged: ((value) {
+              if (value.isEmpty) {
+                setState(() {
+                  mrpMessage = "";
+                });
+              }
+              if (double.tryParse(value) != null &&
+                  double.tryParse(_costController.text) != null) {
+                setState(() {
+                  mrpMessage =
+                      "Difference of MRP % ${calculatePercentageDifference(double.parse(_costController.text), double.parse(value))}";
+                });
+              }
+            }),
+            keyboardType: const TextInputType.numberWithOptions(),
+            decoration: const InputDecoration(
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                fillColor: Colors.black12,
+                focusColor: Colors.grey,
+                filled: true,
+                hintText: "MRP"),
+          ),
+          Text(
+            mrpMessage,
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Text("Selling Margin"),
+          const SizedBox(
+            height: 5,
+          ),
+          TextFormField(
+            controller: _salesController,
+            onChanged: ((value) {
+              if (value.isEmpty) {
+                setState(() {
+                  sellingMessage = "";
+                });
+              }
+              if (double.tryParse(value) != null &&
+                  double.tryParse(_costController.text) != null) {
+                setState(() {
+                  sellingMessage =
+                      "Selling Price = ${calculateNumberWithPercentage(double.parse(_costController.text), double.parse(value))}";
+                });
+              }
+            }),
+            keyboardType: const TextInputType.numberWithOptions(),
+            decoration: const InputDecoration(
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                fillColor: Colors.black12,
+                focusColor: Colors.grey,
+                filled: true,
+                hintText: "Margin in Percentage"),
+          ),
+          Text(
+            sellingMessage,
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ),
           SizedBox(
             height: dH * 0.025,
           ),
@@ -145,9 +242,14 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                   border: Border.all(color: Colors.black12),
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               // child: _image!=null?  const Icon(Icons.camera_alt),
-              child: _image!=null?ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                            child: Image.file(File(_image!.path),fit: BoxFit.fill,)): const Icon(Icons.camera_alt),
+              child: _image != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.file(
+                        File(_image!.path),
+                        fit: BoxFit.fill,
+                      ))
+                  : const Icon(Icons.camera_alt),
             ),
           ),
           SizedBox(
@@ -155,27 +257,42 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
           ),
           PrimaryButton(
               function: () {
-                Provider.of<PurchaseProvider>(context, listen: false)
-                    .addSubProductForPurchase(PurchaseSubProduct(
-                        id: "",
-                        cost: double.parse(_costController.text),
-                        image: _image!=null ?_image!.path : "",
-                        subproduct: widget.subProductModel.id,
-                        name: widget.subProductModel.name,
-                        unit: selectedUnit,
-                        quantity: double.parse(_quantityController.text)));
+                if (!checkPercentageOfMRPandSells()) {
+                  Provider.of<PurchaseProvider>(context, listen: false)
+                      .addSubProductForPurchase(PurchaseSubProduct(
+                          id: "",
+                          cost: double.parse(_costController.text),
+                          image: _image != null ? _image!.path : "",
+                          subproduct: widget.subProductModel.id,
+                          name: widget.subProductModel.name,
+                          unit: selectedUnit,
+                          purchasePercent:
+                              double.tryParse(_mrpController.text) != null
+                                  ? calculatePercentageDifference(
+                                      double.parse(_costController.text),
+                                      double.parse(_mrpController.text))
+                                  : 0.0,
+                          salesPercent:
+                              double.tryParse(_salesController.text) != null
+                                  ? 
+                                      double.parse(_salesController.text)
+                                  : 0.0,
+                          quantity: double.parse(_quantityController.text)));
 
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=>ShowAddPurchaseProducts(supplierModel: Provider.of<PurchaseProvider>(context,listen: false).currentPurchaseModel!.supplier)));
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ShowAddPurchaseProducts(
-                            supplierModel: Provider.of<PurchaseProvider>(
-                                    context,
-                                    listen: false)
-                                .currentPurchaseModel!
-                                .supplier)),
-                    (route) => false);
+                  // Navigator.push(context,MaterialPageRoute(builder: (context)=>ShowAddPurchaseProducts(supplierModel: Provider.of<PurchaseProvider>(context,listen: false).currentPurchaseModel!.supplier)));
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShowAddPurchaseProducts(
+                              supplierModel: Provider.of<PurchaseProvider>(
+                                      context,
+                                      listen: false)
+                                  .currentPurchaseModel!
+                                  .supplier)),
+                      (route) => false);
+                } else {
+                  showToast(message: "Selling Price should be less than MRP");
+                }
               },
               height: dW * 0.12,
               title: "Save Product",
