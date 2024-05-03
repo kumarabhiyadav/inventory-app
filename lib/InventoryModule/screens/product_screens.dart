@@ -27,7 +27,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final TextEditingController _productController = TextEditingController();
-
+  bool isLoading =false;
 
 
   @override
@@ -48,7 +48,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(title: widget.categoryModel.name),
-      body: ListView.separated(
+      body: isLoading ?const Center(child: CircularProgressIndicator(),): ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.05, vertical: size.width * 0.02),
@@ -103,10 +103,14 @@ class _ProductScreenState extends State<ProductScreen> {
                             height: size.width * 0.05,
                           ),
                           PrimaryButton(
-                              function: () async {
+                              function: isLoading?(){} : () async {
                                 if (_productController.text.trim() == "") {
                                   return;
                                 }
+
+                                setState(() {
+                                  isLoading = true;
+                                });
                                 final response =
                                     await Provider.of<InventoryProvider>(
                                             context,
@@ -114,6 +118,10 @@ class _ProductScreenState extends State<ProductScreen> {
                                         .createProduct(
                                             name: _productController.text,categoryModel: widget.categoryModel);
                                 Navigator.of(context).pop();
+
+                                setState(() {
+                                  isLoading = false;
+                                });
                                 if (response != null) {
                                   showSnackBar(
                                       context: context,

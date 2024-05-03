@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
@@ -26,7 +26,7 @@ class SubProductScreen extends StatefulWidget {
 
 class _SubProductScreenState extends State<SubProductScreen> {
   final TextEditingController _subProductController = TextEditingController();
-
+  bool isLoading =  false;
   @override
   void initState() {
     myInit();
@@ -46,7 +46,7 @@ class _SubProductScreenState extends State<SubProductScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(title: widget.productModel.name),
-      body: ListView.separated(
+      body:  isLoading ? const Center(child: CircularProgressIndicator(),): ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.05, vertical: size.width * 0.02),
@@ -119,11 +119,15 @@ class _SubProductScreenState extends State<SubProductScreen> {
                                 height: size.width * 0.05,
                               ),
                               PrimaryButton(
-                                  function: () async {
+                                  function: isLoading ? (){} : () async {
                                     if (_subProductController.text.trim() ==
                                         "") {
                                       return;
                                     }
+
+                                    setState(() {
+                                      isLoading = true;
+                                    });
                                     final response = await Provider.of<
                                                 InventoryProvider>(context,
                                             listen: false)
@@ -131,11 +135,16 @@ class _SubProductScreenState extends State<SubProductScreen> {
                                             name: _subProductController.text,
                                             categoryModel: widget.categoryModel,
                                             productModel: widget.productModel);
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                    
                                     Navigator.of(context).pop();
+                                  
                                     if (response != null) {
                                       showSnackBar(
                                           context: context,
-                                          title: "Product Added Successfully");
+                                          title: "Sub Product Added Successfully");
                                       setState(() {
                                         _subProductController.text = "";
                                       });
