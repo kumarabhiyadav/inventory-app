@@ -26,7 +26,7 @@ class SubProductScreen extends StatefulWidget {
 
 class _SubProductScreenState extends State<SubProductScreen> {
   final TextEditingController _subProductController = TextEditingController();
-  bool isLoading =  false;
+  bool isLoading = false;
   @override
   void initState() {
     myInit();
@@ -46,36 +46,44 @@ class _SubProductScreenState extends State<SubProductScreen> {
 
     return Scaffold(
       appBar: CustomAppBar(title: widget.productModel.name),
-      body:  isLoading ? const Center(child: CircularProgressIndicator(),): ListView.separated(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(
-            horizontal: size.width * 0.05, vertical: size.width * 0.02),
-        separatorBuilder: ((context, index) => const Divider(
-              color: Colors.transparent,
-            )),
-        itemBuilder: ((context, index) => GestureDetector(
-              onTap:
-                  Provider.of<PurchaseProvider>(context).currentPurchaseModel !=
-                          null
-                      ? () {
-                          showModalBottomSheet(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (context) => AddProductForPurchase(
-                                    subProductModel: subProducts[index],
-                                  ));
-                        }
-                      : () {
-
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SubProductPurchase(subProductModel: subProducts[index],)));
-                      },
-              child: Nametile(
-                icon: subProducts[index].imagePath,
-                name: subProducts[index].name,
-              ),
-            )),
-        itemCount: subProducts.length,
-      ),
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.separated(
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.05, vertical: size.width * 0.02),
+              separatorBuilder: ((context, index) => const Divider(
+                    color: Colors.transparent,
+                  )),
+              itemBuilder: ((context, index) => GestureDetector(
+                    onTap: Provider.of<PurchaseProvider>(context)
+                                .currentPurchaseModel !=
+                            null
+                        ? () {
+                            showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) => AddProductForPurchase(
+                                      subProductModel: subProducts[index],
+                                    ));
+                          }
+                        : () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SubProductPurchase(
+                                          subProductModel: subProducts[index],
+                                        )));
+                          },
+                    child: Nametile(
+                      icon: subProducts[index].imagePath,
+                      name: subProducts[index].name,
+                    ),
+                  )),
+              itemCount: subProducts.length,
+            ),
       floatingActionButton: Provider.of<PurchaseProvider>(context)
                   .currentPurchaseModel !=
               null
@@ -119,37 +127,47 @@ class _SubProductScreenState extends State<SubProductScreen> {
                                 height: size.width * 0.05,
                               ),
                               PrimaryButton(
-                                  function: isLoading ? (){} : () async {
-                                    if (_subProductController.text.trim() ==
-                                        "") {
-                                      return;
-                                    }
+                                  function: isLoading
+                                      ? () {}
+                                      : () async {
+                                          if (_subProductController.text
+                                                  .trim() ==
+                                              "") {
+                                            return;
+                                          }
+                                          if (isLoading) return;
 
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    final response = await Provider.of<
-                                                InventoryProvider>(context,
-                                            listen: false)
-                                        .createSubProduct(
-                                            name: _subProductController.text,
-                                            categoryModel: widget.categoryModel,
-                                            productModel: widget.productModel);
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                    
-                                    Navigator.of(context).pop();
-                                  
-                                    if (response != null) {
-                                      showSnackBar(
-                                          context: context,
-                                          title: "Sub Product Added Successfully");
-                                      setState(() {
-                                        _subProductController.text = "";
-                                      });
-                                    }
-                                  },
+                                          setState(() {
+                                            isLoading = true;
+                                          });
+
+                                          final response = await Provider.of<
+                                                      InventoryProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .createSubProduct(
+                                                  name: _subProductController
+                                                      .text,
+                                                  categoryModel:
+                                                      widget.categoryModel,
+                                                  productModel:
+                                                      widget.productModel);
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+
+                                          Navigator.of(context).pop();
+
+                                          if (response != null) {
+                                            showSnackBar(
+                                                context: context,
+                                                title:
+                                                    "Sub Product Added Successfully");
+                                            setState(() {
+                                              _subProductController.text = "";
+                                            });
+                                          }
+                                        },
                                   height: size.width * 0.12,
                                   title: "Save",
                                   width: size.width * 0.9)
@@ -163,7 +181,7 @@ class _SubProductScreenState extends State<SubProductScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+                    .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
               )),
     );
   }

@@ -118,9 +118,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                             return;
                                           }
 
+                                          if(isLoading) return;
+
                                           setState(() {
                                             isLoading = true;
                                           });
+
+                                          print(_categoryController.text);
                                           final response = await Provider.of<
                                                       InventoryProvider>(
                                                   context,
@@ -141,6 +145,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                                     "Category Added Successfully");
                                             setState(() {
                                               _categoryController.text = "";
+                                              isLoading = false;
                                             });
                                           }
                                         },
@@ -161,7 +166,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+                    .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
               )),
     );
   }
