@@ -63,6 +63,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 productModel: products[index],
                                 categoryModel: widget.categoryModel))),
                     child: Nametile(
+                      deletefun:(){} ,
                       icon: products[index].imagePath,
                       name: products[index].name,
                     ),

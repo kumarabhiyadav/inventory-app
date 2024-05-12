@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/common_functions.dart';
@@ -35,7 +36,9 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
     return Scaffold(
       appBar: CustomAppBar(title: widget.subProductModel.name),
       body: ListView.separated(
-        separatorBuilder: ((context, index) => const Divider(color: Colors.transparent,)),
+        separatorBuilder: ((context, index) => const Divider(
+              color: Colors.transparent,
+            )),
         itemBuilder: (context, index) => Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), border: Border.all()),
@@ -47,11 +50,23 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                subproductPurchase[index]['supplier']['name'],
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w600),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    subproductPurchase[index]['supplier']['name'],
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    DateFormat('dd MMM yyyy').format(
+                        DateTime.parse(subproductPurchase[index]['createdAt'])),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
               ),
               SizedBox(
                 height: dW * 0.02,
@@ -122,9 +137,9 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
                             (calculateNumberWithPercentage(
                                     (subproductPurchase[index]['cost'] as int)
                                         .toDouble(), // Convert int to double
-                                    (subproductPurchase[index]
-                                            ['purchasePercent'] as int)
-                                        .toDouble())) // Convert int to double
+                                    double.parse(subproductPurchase[index]
+                                            ['purchasePercent']
+                                        .toString()))) // Convert int to double
                                 .toStringAsFixed(2),
                           ),
                         ],

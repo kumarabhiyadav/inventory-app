@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/models/inventory_models.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/InventoryModule/screens/product_screens.dart';
+import 'package:inventory_app/api.dart';
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/commonWidgets/name_tile.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
 import 'package:inventory_app/commonWidgets/snack_bar.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
+import 'package:inventory_app/services/http_service.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -32,6 +34,39 @@ class _CategoryScreenState extends State<CategoryScreen> {
   myInit() async {
     await Provider.of<InventoryProvider>(context, listen: false)
         .fetchCategories();
+  }
+
+  deleteFunction(String name) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text("Dalete Catgory"),
+              content: Text('Do you want to Delete $name'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    child: const Text('Yes')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: const Text('No')),
+              ],
+            )).then((value) async {
+         
+         if(value != null && value){
+
+          setState(() {
+            isLoading = true;
+          });
+        
+
+          
+
+         }
+    });
   }
 
   @override
@@ -61,6 +96,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               ProductScreen(categoryModel: categories[index])),
                     ),
                     child: Nametile(
+                      deletefun: deleteFunction,
                       icon: categories[index].imagePath,
                       name: categories[index].name,
                     ),
@@ -118,7 +154,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                             return;
                                           }
 
-                                          if(isLoading) return;
+                                          if (isLoading) return;
 
                                           setState(() {
                                             isLoading = true;

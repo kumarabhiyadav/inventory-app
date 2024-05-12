@@ -5,10 +5,11 @@ import 'package:inventory_app/colors.dart';
 
 // ignore: must_be_immutable
 class Nametile extends StatelessWidget {
-  Nametile({Key? key, required this.name, required this.icon})
-    : super(key: key);
-   String name;
+  Nametile({Key? key, required this.name, required this.icon, required this.deletefun})
+      : super(key: key);
+  String name;
   String icon;
+  Function deletefun;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +42,17 @@ class Nametile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(
-            'assets/svgs/delete.svg',
-            height: 28,
-            width: 28,
-            fit: BoxFit.fill,
-            color: Colors.red,
+          GestureDetector(
+            onTap: (){
+              deletefun(name);
+            },
+            child: SvgPicture.asset(
+              'assets/svgs/delete.svg',
+              height: 28,
+              width: 28,
+              fit: BoxFit.fill,
+              color: Colors.red,
+            ),
           ),
           SizedBox(
             width: size.width * 0.025,

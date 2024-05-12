@@ -21,6 +21,12 @@ const endPoints = {
   'fetchSubProducts' : 'inventory/fetchSubProducts',
 
 
+  'deleteCategory' : 'inventory/deleteCategory',
+  'deleteProduct' : 'inventory/deleteProduct',
+  'deleteSubproduct' : 'inventory/deleteSubproduct',
+
+
+
   'searchSubProducts' : 'inventory/searchSubProducts',
 
   'createPurchase' : 'inventory/createPurchase',

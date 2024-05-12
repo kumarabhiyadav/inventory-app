@@ -26,6 +26,7 @@ class ShowAddPurchaseProducts extends StatefulWidget {
 }
 
 class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final dW = MediaQuery.of(context).size.width;
@@ -60,57 +61,62 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
           ),
         ),
       ),
-      body: purchaseModel != null
-          ? purchaseModel.subProducts.isNotEmpty
-              ? Column(children: [
-                  ...purchaseModel.subProducts.map((e) => Container(
-                        margin: EdgeInsets.symmetric(horizontal: dW * 0.05),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: Container(
-                            height: dW * 0.12,
-                            width: dW * 0.12,
-                            // padding: EdgeInsets.all(2),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black12),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: e.image != ""
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.file(
-                                      File(e.image),
-                                      fit: BoxFit.fill,
-                                    ))
-                                : const Icon(Icons.image_not_supported_rounded),
-                          ),
-                          title: Text(e.name),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("\u{20B9}${e.cost.toStringAsFixed(2)}"),
-                              const Text("X"),
-                              Text(e.quantity.toStringAsFixed(2)),
-                              const Text("="),
-                              Text((e.cost * e.quantity).toStringAsFixed(2)),
-                            ],
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(
-                              Icons.delete_forever_sharp,
-                              color: Colors.red,
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : purchaseModel != null
+              ? purchaseModel.subProducts.isNotEmpty
+                  ? Column(children: [
+                      ...purchaseModel.subProducts.map((e) => Container(
+                            margin: EdgeInsets.symmetric(horizontal: dW * 0.05),
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              leading: Container(
+                                height: dW * 0.12,
+                                width: dW * 0.12,
+                                // padding: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black12),
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: e.image != ""
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.file(
+                                          File(e.image),
+                                          fit: BoxFit.fill,
+                                        ))
+                                    : const Icon(
+                                        Icons.image_not_supported_rounded),
+                              ),
+                              title: Text(e.name),
+                              subtitle: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text("\u{20B9}${e.cost.toStringAsFixed(2)}"),
+                                  const Text("X"),
+                                  Text(e.quantity.toStringAsFixed(2)),
+                                  const Text("="),
+                                  Text(
+                                      (e.cost * e.quantity).toStringAsFixed(2)),
+                                ],
+                              ),
+                              trailing: IconButton(
+                                icon: const Icon(
+                                  Icons.delete_forever_sharp,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  Provider.of<PurchaseProvider>(context,
+                                          listen: false)
+                                      .deleteSubProductForPurchase(e);
+                                },
+                              ),
                             ),
-                            onPressed: () {
-                              Provider.of<PurchaseProvider>(context,
-                                      listen: false)
-                                  .deleteSubProductForPurchase(e);
-                            },
-                          ),
-                        ),
-                      ))
-                ])
-              : null
-          : null,
+                          ))
+                    ])
+                  : null
+              : null,
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -135,7 +141,10 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
           SecondaryButton(
               function: () async {
                 //
-
+                if (isLoading) return;
+                setState(() {
+                  isLoading = true;
+                });
                 if (Provider.of<PurchaseProvider>(context, listen: false)
                     .currentPurchaseModel!
                     .subProducts
@@ -147,6 +156,12 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
                 final response =
                     await Provider.of<PurchaseProvider>(context, listen: false)
                         .createPurchase();
+
+                setState(() {
+                  isLoading = false;
+                });
+
+                showToast(message: "Purchase saved success fully");
 
                 if (response != null) {
                   // ignore: use_build_context_synchronously

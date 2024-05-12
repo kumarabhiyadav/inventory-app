@@ -70,7 +70,8 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
       double? sales = double.tryParse(_salesController.text);
 
       if (cost != null && sales != null) {
-        return mrp <= calculateNumberWithPercentage(cost, sales);
+        // return mrp <= calculateNumberWithPercentage(cost, sales);
+        return mrp <= double.parse(_salesController.text);
       }
     }
 
@@ -196,14 +197,15 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
           const SizedBox(
             height: 10,
           ),
-          const Text("Selling Margin"),
+          const Text("Selling Price"),
           const SizedBox(
             height: 5,
           ),
           TextFormField(
             controller: _salesController,
             onChanged: ((value) {
-              if (value.isEmpty) {
+
+               if (value.isEmpty) {
                 setState(() {
                   sellingMessage = "";
                 });
@@ -212,9 +214,21 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                   double.tryParse(_costController.text) != null) {
                 setState(() {
                   sellingMessage =
-                      "Selling Price = ${calculateNumberWithPercentage(double.parse(_costController.text), double.parse(value))}";
+                      "Difference of Selling % ${calculatePercentageDifference(double.parse(_costController.text), double.parse(value))}";
                 });
               }
+              // if (value.isEmpty) {
+              //   setState(() {
+              //     sellingMessage = "";
+              //   });
+              // }
+              // if (double.tryParse(value) != null &&
+              //     double.tryParse(_costController.text) != null) {
+              //   setState(() {
+              //     sellingMessage =
+              //         "Selling Price = ${calculateNumberWithPercentage(double.parse(_costController.text), double.parse(value))}";
+              //   });
+              // }
             }),
             keyboardType: const TextInputType.numberWithOptions(),
             decoration: const InputDecoration(
@@ -223,7 +237,7 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                 fillColor: Colors.black12,
                 focusColor: Colors.grey,
                 filled: true,
-                hintText: "Margin in Percentage"),
+                hintText: "Selling Price"),
           ),
           Text(
             sellingMessage,

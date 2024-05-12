@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/InventoryModule/screens/category_screen.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/financeModule/screens/report_screen.dart';
 import 'package:inventory_app/financeModule/screens/sales_screen.dart';
+import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/supplier_screen.dart';
+import 'package:provider/provider.dart';
 import '../commonWidgets/options.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -72,6 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Options(
               function: () {
+                Provider.of<PurchaseProvider>(context, listen: false)
+                    .currentPurchaseModel = null;
                 Navigator.push(
                     context,
                     MaterialPageRoute(

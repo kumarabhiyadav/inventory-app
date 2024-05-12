@@ -134,7 +134,8 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                 child: Column(children: [
                   ...widget.purchaseModel.subProducts.map((sub) => Container(
                         decoration: BoxDecoration(
-                            border: Border.all(width: 0.8, color: Colors.black12),
+                            border:
+                                Border.all(width: 0.8, color: Colors.black12),
                             color: Colors.white,
                             boxShadow: const [
                               BoxShadow(
@@ -158,11 +159,13 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                   children: [
                                     Text(
                                       sub.name,
-                                      style: Theme.of(context).textTheme.headline4,
+                                      style:
+                                          Theme.of(context).textTheme.headline4,
                                     ),
                                     Text(
                                       sub.unit,
-                                      style: Theme.of(context).textTheme.subtitle2,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle2,
                                     ),
                                   ],
                                 ),
@@ -185,12 +188,14 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => ShowImage(
-                                                        title: sub.name,
-                                                        url: sub.image)));
+                                                    builder: (context) =>
+                                                        ShowImage(
+                                                            title: sub.name,
+                                                            url: sub.image)));
                                           },
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                             child: Image.network(
                                               sub.image,
                                               height: 40,
@@ -229,7 +234,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                     // Text(widget.purchaseModel
                                     //     .rateWithExtraCost(subProduct: sub)
                                     //     .toStringAsFixed(2)),m
-                
+
                                     Text((sub.quantity * sub.cost)
                                         .toStringAsFixed(2)),
                                   ],
@@ -253,20 +258,21 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text('MRP %'),
-                                    Text((sub.purchasePercent).toStringAsFixed(2)),
+                                    Text((sub.purchasePercent)
+                                        .toStringAsFixed(2)),
                                   ],
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('Selling %'),
+                                    const Text('Selling Price'),
                                     Text((sub.salesPercent).toStringAsFixed(2)),
                                   ],
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    const Text('Selling Price'),
+                                    const Text('Selling %'),
                                     Text((calculateNumberWithPercentage(
                                             sub.cost, sub.salesPercent))
                                         .toStringAsFixed(2)),

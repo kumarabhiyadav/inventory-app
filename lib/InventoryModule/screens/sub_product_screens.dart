@@ -78,6 +78,7 @@ class _SubProductScreenState extends State<SubProductScreen> {
                                         )));
                           },
                     child: Nametile(
+                      deletefun: (){},
                       icon: subProducts[index].imagePath,
                       name: subProducts[index].name,
                     ),
