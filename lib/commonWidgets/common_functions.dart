@@ -7,3 +7,5 @@ double calculatePercentageDifference(double oldValue, double newValue) {
 double calculateNumberWithPercentage(double baseNumber, double percentage) {
   return baseNumber + (baseNumber * percentage / 100);
 }
+
+

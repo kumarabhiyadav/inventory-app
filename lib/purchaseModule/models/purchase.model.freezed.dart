@@ -310,8 +310,8 @@ mixin _$PurchaseSubProduct {
   String get name => throw _privateConstructorUsedError;
   String get unit => throw _privateConstructorUsedError;
   double get quantity => throw _privateConstructorUsedError;
-  double get purchasePercent => throw _privateConstructorUsedError;
-  double get salesPercent => throw _privateConstructorUsedError;
+  double get mrp => throw _privateConstructorUsedError;
+  double get sellingprice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -333,8 +333,8 @@ abstract class $PurchaseSubProductCopyWith<$Res> {
       @JsonKey(name: 'name') String name,
       String unit,
       double quantity,
-      double purchasePercent,
-      double salesPercent});
+      double mrp,
+      double sellingprice});
 }
 
 /// @nodoc
@@ -357,8 +357,8 @@ class _$PurchaseSubProductCopyWithImpl<$Res, $Val extends PurchaseSubProduct>
     Object? name = null,
     Object? unit = null,
     Object? quantity = null,
-    Object? purchasePercent = null,
-    Object? salesPercent = null,
+    Object? mrp = null,
+    Object? sellingprice = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -389,13 +389,13 @@ class _$PurchaseSubProductCopyWithImpl<$Res, $Val extends PurchaseSubProduct>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double,
-      purchasePercent: null == purchasePercent
-          ? _value.purchasePercent
-          : purchasePercent // ignore: cast_nullable_to_non_nullable
+      mrp: null == mrp
+          ? _value.mrp
+          : mrp // ignore: cast_nullable_to_non_nullable
               as double,
-      salesPercent: null == salesPercent
-          ? _value.salesPercent
-          : salesPercent // ignore: cast_nullable_to_non_nullable
+      sellingprice: null == sellingprice
+          ? _value.sellingprice
+          : sellingprice // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
   }
@@ -417,8 +417,8 @@ abstract class _$$PurchaseSubProductImplCopyWith<$Res>
       @JsonKey(name: 'name') String name,
       String unit,
       double quantity,
-      double purchasePercent,
-      double salesPercent});
+      double mrp,
+      double sellingprice});
 }
 
 /// @nodoc
@@ -439,8 +439,8 @@ class __$$PurchaseSubProductImplCopyWithImpl<$Res>
     Object? name = null,
     Object? unit = null,
     Object? quantity = null,
-    Object? purchasePercent = null,
-    Object? salesPercent = null,
+    Object? mrp = null,
+    Object? sellingprice = null,
   }) {
     return _then(_$PurchaseSubProductImpl(
       id: null == id
@@ -471,13 +471,13 @@ class __$$PurchaseSubProductImplCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as double,
-      purchasePercent: null == purchasePercent
-          ? _value.purchasePercent
-          : purchasePercent // ignore: cast_nullable_to_non_nullable
+      mrp: null == mrp
+          ? _value.mrp
+          : mrp // ignore: cast_nullable_to_non_nullable
               as double,
-      salesPercent: null == salesPercent
-          ? _value.salesPercent
-          : salesPercent // ignore: cast_nullable_to_non_nullable
+      sellingprice: null == sellingprice
+          ? _value.sellingprice
+          : sellingprice // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -494,8 +494,8 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
       @JsonKey(name: 'name') required this.name,
       required this.unit,
       required this.quantity,
-      required this.purchasePercent,
-      required this.salesPercent});
+      required this.mrp,
+      required this.sellingprice});
 
   factory _$PurchaseSubProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$PurchaseSubProductImplFromJson(json);
@@ -518,13 +518,13 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
   @override
   final double quantity;
   @override
-  final double purchasePercent;
+  final double mrp;
   @override
-  final double salesPercent;
+  final double sellingprice;
 
   @override
   String toString() {
-    return 'PurchaseSubProduct(id: $id, cost: $cost, image: $image, subproduct: $subproduct, name: $name, unit: $unit, quantity: $quantity, purchasePercent: $purchasePercent, salesPercent: $salesPercent)';
+    return 'PurchaseSubProduct(id: $id, cost: $cost, image: $image, subproduct: $subproduct, name: $name, unit: $unit, quantity: $quantity, mrp: $mrp, sellingprice: $sellingprice)';
   }
 
   @override
@@ -541,16 +541,15 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
             (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.purchasePercent, purchasePercent) ||
-                other.purchasePercent == purchasePercent) &&
-            (identical(other.salesPercent, salesPercent) ||
-                other.salesPercent == salesPercent));
+            (identical(other.mrp, mrp) || other.mrp == mrp) &&
+            (identical(other.sellingprice, sellingprice) ||
+                other.sellingprice == sellingprice));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, cost, image, subproduct,
-      name, unit, quantity, purchasePercent, salesPercent);
+      name, unit, quantity, mrp, sellingprice);
 
   @JsonKey(ignore: true)
   @override
@@ -576,8 +575,8 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
       @JsonKey(name: 'name') required final String name,
       required final String unit,
       required final double quantity,
-      required final double purchasePercent,
-      required final double salesPercent}) = _$PurchaseSubProductImpl;
+      required final double mrp,
+      required final double sellingprice}) = _$PurchaseSubProductImpl;
 
   factory _PurchaseSubProduct.fromJson(Map<String, dynamic> json) =
       _$PurchaseSubProductImpl.fromJson;
@@ -600,9 +599,9 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
   @override
   double get quantity;
   @override
-  double get purchasePercent;
+  double get mrp;
   @override
-  double get salesPercent;
+  double get sellingprice;
   @override
   @JsonKey(ignore: true)
   _$$PurchaseSubProductImplCopyWith<_$PurchaseSubProductImpl> get copyWith =>

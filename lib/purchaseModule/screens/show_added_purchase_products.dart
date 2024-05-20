@@ -139,39 +139,42 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
             height: dW * 0.025,
           ),
           SecondaryButton(
-              function: () async {
-                //
-                if (isLoading) return;
-                setState(() {
-                  isLoading = true;
-                });
-                if (Provider.of<PurchaseProvider>(context, listen: false)
-                    .currentPurchaseModel!
-                    .subProducts
-                    .isEmpty) {
-                  showToast(message: "Please choose products first");
-                  return;
-                }
+              function: isLoading
+                  ? () {}
+                  : () async {
+                      //
+                      if (isLoading) return;
+                      setState(() {
+                        isLoading = true;
+                      });
+                      if (Provider.of<PurchaseProvider>(context, listen: false)
+                          .currentPurchaseModel!
+                          .subProducts
+                          .isEmpty) {
+                        showToast(message: "Please choose products first");
+                        return;
+                      }
 
-                final response =
-                    await Provider.of<PurchaseProvider>(context, listen: false)
-                        .createPurchase();
+                      final response = await Provider.of<PurchaseProvider>(
+                              context,
+                              listen: false)
+                          .createPurchase();
 
-                setState(() {
-                  isLoading = false;
-                });
+                      setState(() {
+                        isLoading = false;
+                      });
 
-                showToast(message: "Purchase saved success fully");
+                      showToast(message: "Purchase saved success fully");
 
-                if (response != null) {
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                      (route) => false);
-                }
-              },
+                      if (response != null) {
+                        // ignore: use_build_context_synchronously
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
+                            (route) => false);
+                      }
+                    },
               height: dW * 0.12,
               width: dW * .9,
               title: "Save",

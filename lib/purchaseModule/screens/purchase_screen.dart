@@ -15,9 +15,19 @@ class PurchaseScreen extends StatefulWidget {
 }
 
 class _PurchaseScreenState extends State<PurchaseScreen> {
+
+  bool isLoading = false;
   myInit() async {
+
+    setState(() {
+      isLoading = true;
+    });
     await Provider.of<PurchaseProvider>(context, listen: false)
         .fetchPurchases();
+
+        setState(() {
+          isLoading =  false;
+        });
   }
 
   @override
@@ -34,7 +44,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
         Provider.of<PurchaseProvider>(context).purchase;
     return Scaffold(
       appBar: const CustomAppBar(title: 'Purchases'),
-      body: ListView.separated(
+      body: isLoading ?  const Center(child: CircularProgressIndicator(),) : ListView.separated(
         separatorBuilder: ((context, index) => const Divider(
               color: Colors.transparent,
             )),

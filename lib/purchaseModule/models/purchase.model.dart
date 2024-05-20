@@ -31,8 +31,8 @@ class PurchaseSubProduct with _$PurchaseSubProduct {
   @JsonKey(name: 'name') required String name,
   required  String unit,
   required  double quantity,  
-  required  double purchasePercent,  
-  required  double salesPercent,  
+  required  double mrp,  
+  required  double sellingprice,  
 
 
   }) = _PurchaseSubProduct;

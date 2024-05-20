@@ -112,6 +112,11 @@ class PurchaseProvider with ChangeNotifier {
     final response =
         await HttpService.delete('${getEndPoint('deletePurchase')}/' + id);
     print(response);
+    if (response!=null ) {
+         purchase.removeWhere((element) => element.id ==  id);
+         notifyListeners();
+    }
+    
   }
 
   fetchSubProductPurchases({required String id}) async {
@@ -123,6 +128,7 @@ class PurchaseProvider with ChangeNotifier {
 
     if (response != null) {
       response['result'].forEach((e) => {subProductpurchase.add(e)});
+      print(subProductpurchase);
       notifyListeners();
     }
   }

@@ -19,35 +19,45 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PurchaseProvider()),
         ChangeNotifierProvider(create: (_) => SupplierProvider()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Colors.black87,
-          fontFamily: 'Lato',
-          textTheme: TextTheme(
-            headline5: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).primaryColor,
-              letterSpacing: .67,
-              fontSize: h3,
-            ),
-            headline4: const TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-              letterSpacing: .67,
-              fontSize: h5,
-            ),
-            subtitle1: const TextStyle(
-              fontWeight: FontWeight.w500,
-              letterSpacing: .67,
-            ),
-            subtitle2: const TextStyle(
-              fontWeight: FontWeight.w500,
-              letterSpacing: .67,
+      child: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            FocusManager.instance.primaryFocus!.unfocus();
+          }
+        },
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.black87,
+            fontFamily: 'Lato',
+            textTheme: TextTheme(
+              headline5: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).primaryColor,
+                letterSpacing: .67,
+                fontSize: h3,
+              ),
+              headline4: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+                letterSpacing: .67,
+                fontSize: h5,
+              ),
+              subtitle1: const TextStyle(
+                fontWeight: FontWeight.w500,
+                letterSpacing: .67,
+              ),
+              subtitle2: const TextStyle(
+                fontWeight: FontWeight.w500,
+                letterSpacing: .67,
+              ),
             ),
           ),
+          home: const HomeScreen(),
         ),
-        home: const HomeScreen(),
       ),
     );
   }

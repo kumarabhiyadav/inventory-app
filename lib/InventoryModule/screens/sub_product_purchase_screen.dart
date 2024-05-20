@@ -133,50 +133,39 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('MRP'),
-                          Text(
-                            (calculateNumberWithPercentage(
-                                    (subproductPurchase[index]['cost'] as int)
-                                        .toDouble(), // Convert int to double
-                                    double.parse(subproductPurchase[index]
-                                            ['purchasePercent']
-                                        .toString()))) // Convert int to double
-                                .toStringAsFixed(2),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('MRP %'),
-                          Text((subproductPurchase[index]['purchasePercent'])
+                          Text(subproductPurchase[index]['mrp']
                               .toStringAsFixed(2)),
                         ],
                       ),
                       Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('MRP %'),
+                            Text((calculatePercentageDifference(
+                                    subproductPurchase[index]['cost'].toDouble(),
+                                    subproductPurchase[index]['mrp'].toDouble()))
+                                .toStringAsFixed(2))
+                          ]),
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Selling %'),
-                          Text((subproductPurchase[index]['salesPercent'])
+                          const Text('Selling Price'),
+                          Text((subproductPurchase[index]['sellingprice'].toDouble())
                               .toStringAsFixed(2)),
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Text('Selling Price'),
-                          Text(
-                            (calculateNumberWithPercentage(
-                                    (subproductPurchase[index]['cost'] as int)
-                                        .toDouble(), // Cast to int then to double
-                                    (subproductPurchase[index]['salesPercent']
-                                            as int)
-                                        .toDouble())) // Cast to int then to double
-                                .toStringAsFixed(2),
-                          ),
+                          const Text('Selling %'),
+                          Text((calculatePercentageDifference(
+                                  subproductPurchase[index]['cost'].toDouble(),
+                                  subproductPurchase[index]['sellingprice'].toDouble()))
+                              .toStringAsFixed(2)),
                         ],
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ],
