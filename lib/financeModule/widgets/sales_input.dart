@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:inventory_app/commonWidgets/primary_button.dart';
-import 'package:inventory_app/financeModule/model/sales_model.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:provider/provider.dart';
 

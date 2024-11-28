@@ -56,7 +56,7 @@ class Options extends StatelessWidget {
                 title,
                 style: Theme.of(context)
                     .textTheme
-                    .headline5!
+                    .bodyLarge!
                     .copyWith(color: Colors.white),
               ),
               SizedBox(
@@ -66,7 +66,7 @@ class Options extends StatelessWidget {
                 subTitle,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle2!
+                    .labelSmall!
                     .copyWith(color: Colors.white),
               )
             ],

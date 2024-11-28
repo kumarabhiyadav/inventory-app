@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
 import 'package:inventory_app/InventoryModule/screens/category_screen.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
@@ -8,6 +7,7 @@ import 'package:inventory_app/financeModule/screens/sales_screen.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/supplier_screen.dart';
+import 'package:inventory_app/screens/qr_scanner.screen.dart';
 import 'package:provider/provider.dart';
 import '../commonWidgets/options.dart';
 
@@ -98,6 +98,19 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: 'assets/svgs/reports.svg',
               subTitle: 'Generate excel reports',
               title: 'Reports',
+            ),
+            Options(
+              function: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const QRScannerPage()));
+
+              },
+              size: size,
+              icon: 'assets/svgs/reports.svg',
+              subTitle: 'Scan QR code',
+              title: 'Sell',
             ),
           ],
         ),

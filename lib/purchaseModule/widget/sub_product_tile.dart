@@ -22,7 +22,7 @@ class SubProductTile extends StatelessWidget {
         subProductModel.name,
         style: Theme.of(context)
             .textTheme
-            .headline5!
+            .bodyLarge!
             .copyWith(fontSize: 15, color: Colors.black),
       ),
       leading: Container(

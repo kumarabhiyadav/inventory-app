@@ -113,7 +113,7 @@ class _SalesScreenState extends State<SalesScreen> {
             'Add today\'s Sales',
             style: Theme.of(context)
                 .textTheme
-                .subtitle2!
+                .labelSmall!
                 .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
           )),
     );
@@ -150,14 +150,14 @@ class SalesList extends StatelessWidget {
               children: [
                 Text(
                   "Online",
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(
                   height: dW * 0.01,
                 ),
                 Text(
                   "\u{20B9} ${salesModel.onlineSaleAmount.toStringAsFixed(2)}",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )
               ],
             ),
@@ -166,14 +166,14 @@ class SalesList extends StatelessWidget {
               children: [
                 Text(
                   "Cash",
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(
                   height: dW * 0.01,
                 ),
                 Text(
                   "\u{20B9} ${salesModel.cashSaleAmount.toStringAsFixed(2)}",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 )
               ],
             ),

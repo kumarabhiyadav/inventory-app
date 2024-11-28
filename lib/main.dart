@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/providers/inventory_provider.dart';
+import 'package:inventory_app/InventoryModule/screens/success_screen.dart';
 import 'package:inventory_app/font_size.dart';
 import 'package:inventory_app/home/home_screen.dart';
 import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
@@ -34,23 +35,23 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.black87,
             fontFamily: 'Lato',
             textTheme: TextTheme(
-              headline5: TextStyle(
+              bodyLarge: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).primaryColor,
                 letterSpacing: .67,
                 fontSize: h3,
               ),
-              headline4: const TextStyle(
+              bodyMedium: const TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
                 letterSpacing: .67,
                 fontSize: h5,
               ),
-              subtitle1: const TextStyle(
+              labelMedium: const TextStyle(
                 fontWeight: FontWeight.w500,
                 letterSpacing: .67,
               ),
-              subtitle2: const TextStyle(
+              labelSmall: const TextStyle(
                 fontWeight: FontWeight.w500,
                 letterSpacing: .67,
               ),

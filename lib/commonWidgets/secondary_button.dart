@@ -32,7 +32,7 @@ class SecondaryButton extends StatelessWidget {
                 title,
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .bodyMedium!
                     .copyWith(color: Colors.white, fontWeight: FontWeight.w400),
               ),
               icon ?? const SizedBox.shrink()

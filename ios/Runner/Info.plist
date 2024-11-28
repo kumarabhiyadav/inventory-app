@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow access to the camera to take photos and record videos</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to the photo library to select photos</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -30,6 +26,11 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to the camera to take photos and record videos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to the photo library to select photos</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

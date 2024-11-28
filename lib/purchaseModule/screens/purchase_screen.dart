@@ -116,7 +116,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
             'Add new purchase',
             style: Theme.of(context)
                 .textTheme
-                .subtitle2!
+                .labelSmall!
                 .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
           )),
     );
@@ -339,7 +339,7 @@ class PurchaseWidget extends StatelessWidget {
     //             children: [
     //               Text(
     //                 'Products Cost',
-    //                 style: Theme.of(context).textTheme.subtitle1,
+    //                 style: Theme.of(context).textTheme.labelMedium,
     //               ),
     //               const SizedBox(
     //                 height: 5,
@@ -348,7 +348,7 @@ class PurchaseWidget extends StatelessWidget {
     //                 "",
     //                 style: Theme.of(context)
     //                     .textTheme
-    //                     .headline4!
+    //                     .bodyMedium!
     //                     .copyWith(fontSize: 14),
     //               ),
     //             ],
@@ -358,7 +358,7 @@ class PurchaseWidget extends StatelessWidget {
     //             children: [
     //               Text(
     //                 'Extra Cost',
-    //                 style: Theme.of(context).textTheme.subtitle1,
+    //                 style: Theme.of(context).textTheme.labelMedium,
     //               ),
     //               const SizedBox(
     //                 height: 5,
@@ -368,7 +368,7 @@ class PurchaseWidget extends StatelessWidget {
     //                 "",
     //                 style: Theme.of(context)
     //                     .textTheme
-    //                     .subtitle2!
+    //                     .labelSmall!
     //                     .copyWith(
     //                         color: Colors.red.withOpacity(0.7),
     //                         fontWeight: FontWeight.w600),
@@ -380,7 +380,7 @@ class PurchaseWidget extends StatelessWidget {
     //             children: [
     //               Text(
     //                 'Grand Total',
-    //                 style: Theme.of(context).textTheme.subtitle1,
+    //                 style: Theme.of(context).textTheme.labelMedium,
     //               ),
     //               const SizedBox(
     //                 height: 5,
@@ -390,7 +390,7 @@ class PurchaseWidget extends StatelessWidget {
     //                 //         purchases[0].getTotalOfSubProducts())
     //                 //     .toStringAsFixed(2),
     //                 "",
-    //                 style: Theme.of(context).textTheme.headline4,
+    //                 style: Theme.of(context).textTheme.bodyMedium,
     //               ),
     //             ],
     //           )

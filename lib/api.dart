@@ -1,4 +1,4 @@
-// const domain =  "http://192.168.0.102:6001";
+// const domain =  "http://192.168.0.101:6001";
 // const domain = "http://127.0.0.1:6001";
 
 const domain = "http://13.60.46.80:6001";
@@ -37,6 +37,10 @@ const endPoints = {
 
   'fetchSubProductPurchase'  : 'inventory/fetchSubProductPurchase',
 
+  'getProductByQR' : 'inventory/getProductByQR',
+
+  'sellProductQR' : 'inventory/sellProductQR'
+
 
 
 
@@ -46,3 +50,8 @@ const endPoints = {
 
 
 String getEndPoint(name) =>  "$domain/api/${endPoints[name]}";
+
+String getEndPointWithQuery({required name,required query}) =>  "$domain/api/${endPoints[name]}$query";
+
+
+bool showRate =  false;

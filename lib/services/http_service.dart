@@ -25,6 +25,7 @@ class HttpService {
 
   static getRequest(String url) async {
     try {
+      print(url);
       final http.Response response =
           await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode >= 200 || response.statusCode <= 204) {

@@ -36,13 +36,13 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   children: [
                     Text(
                       'Supplier',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(
                       width: dW*0.6,
                       child: Text(
                         widget.purchaseModel.supplier.name,
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     )
                   ],
@@ -52,14 +52,14 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   children: [
                     Text(
                       'Date',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
                       DateFormat('dd MMM yyyy')
                           .format(widget.purchaseModel.purchaseDate),
                       style: Theme.of(context)
                           .textTheme
-                          .headline5!
+                          .bodyLarge!
                           .copyWith(fontSize: 14),
                     ),
                   ],
@@ -74,7 +74,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
               children: [
                 Text(
                   'Total Cost',
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 const SizedBox(
                   height: 5,
@@ -84,7 +84,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                   // "",
                   style: Theme.of(context)
                       .textTheme
-                      .headline4!
+                      .bodyMedium!
                       .copyWith(fontSize: 14),
                 ),
               ],
@@ -95,7 +95,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
             //   children: [
             //     Text(
             //       'Extra Cost',
-            //       style: Theme.of(context).textTheme.subtitle1,
+            //       style: Theme.of(context).textTheme.labelMedium,
             //     ),
             //     const SizedBox(
             //       height: 5,
@@ -103,7 +103,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
             //     Text(
             //       // widget.purchaseModel.additionalCost.toStringAsFixed(2),
             //       "",
-            //       style: Theme.of(context).textTheme.subtitle2!.copyWith(
+            //       style: Theme.of(context).textTheme.labelSmall!.copyWith(
             //           color: Colors.red.withOpacity(0.7),
             //           fontWeight: FontWeight.w600),
             //     ),
@@ -115,7 +115,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
             //   children: [
             //     Text(
             //       'Grand Total',
-            //       style: Theme.of(context).textTheme.subtitle1,
+            //       style: Theme.of(context).textTheme.labelMedium,
             //     ),
             //     const SizedBox(
             //       height: 5,
@@ -125,7 +125,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
             //       //         widget.purchaseModel.getTotalOfSubProducts())
             //       //     .toStringAsFixed(2),
             //       "",
-            //       style: Theme.of(context).textTheme.headline4,
+            //       style: Theme.of(context).textTheme.bodyMedium,
             //     ),
             //   ],
             // ),
@@ -165,13 +165,13 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                       child: Text(
                                         sub.name,
                                         style:
-                                            Theme.of(context).textTheme.headline4,
+                                            Theme.of(context).textTheme.bodyMedium,
                                       ),
                                     ),
                                     Text(
                                       sub.unit,
                                       style:
-                                          Theme.of(context).textTheme.subtitle2,
+                                          Theme.of(context).textTheme.labelSmall,
                                     ),
                                   ],
                                 ),

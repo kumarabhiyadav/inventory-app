@@ -110,4 +110,17 @@ class InventoryProvider with ChangeNotifier {
         });
     notifyListeners();
   }
+
+  getProductByQRcode(code, pass) async {
+    final result = await HttpService.getRequest(
+        getEndPointWithQuery(name: 'getProductByQR', query: '/$code/$pass'));
+    return result;
+  }
+
+   sellByQrCode(code, pass,qyt,cost,note) async {
+    final result = await HttpService.getRequest(
+        getEndPointWithQuery(name: 'sellProductQR', query: '/$code/$pass/$qyt/$cost/$note'));
+        print(result);
+    return result;
+  }
 }
