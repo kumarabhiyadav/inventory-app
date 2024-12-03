@@ -165,7 +165,18 @@ class _InventoryDetailScreenState extends State<InventoryDetailScreen> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomAppBar(title: widget.subProduct.name),
+      appBar: CustomAppBar(
+        title: widget.subProduct.name,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.popUntil(
+                context,
+                (route) => route
+                    .isFirst, // Stop popping when the first route is reached
+              );
+            },
+            child: const BackButtonIcon()),
+      ),
       body: Container(
         margin: EdgeInsets.all(size.width * 0.05),
         child: Column(
@@ -221,7 +232,7 @@ class _InventoryDetailScreenState extends State<InventoryDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "MIN Price",
+                  "P",
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!

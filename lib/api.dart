@@ -39,7 +39,8 @@ const endPoints = {
 
   'getProductByQR' : 'inventory/getProductByQR',
 
-  'sellProductQR' : 'inventory/sellProductQR'
+  'sellProductQR' : 'inventory/sellProductQR',
+  'getInventoryDetails' : 'inventory/getInventoryDetails' 
 
 
 

@@ -10,6 +10,7 @@ class InventoryProvider with ChangeNotifier {
   List<ProductModel> products = [];
   List<SubProductModel> subProducts = [];
   List<SubProductModel> searchedSubProduct = [];
+  List<dynamic> inventoryLogs = [];
 
   createCategory({required String name}) async {
     final response = await HttpService.postRequest(
@@ -117,10 +118,19 @@ class InventoryProvider with ChangeNotifier {
     return result;
   }
 
-   sellByQrCode(code, pass,qyt,cost,note) async {
-    final result = await HttpService.getRequest(
-        getEndPointWithQuery(name: 'sellProductQR', query: '/$code/$pass/$qyt/$cost/$note'));
-        print(result);
+  sellByQrCode(code, pass, qyt, cost, note) async {
+    final result = await HttpService.getRequest(getEndPointWithQuery(
+        name: 'sellProductQR', query: '/$code/$pass/$qyt/$cost/$note'));
+    print(result);
     return result;
+  }
+
+  getInventoryDetails() async {
+    final result =
+        await HttpService.getRequest(getEndPoint('getInventoryDetails'));
+    if (result != null && result['success']) {
+      inventoryLogs = result['result'];
+      notifyListeners();
+    }
   }
 }
