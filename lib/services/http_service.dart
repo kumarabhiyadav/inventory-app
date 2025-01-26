@@ -11,6 +11,8 @@ class HttpService {
 
   static postRequest(String url, String body) async {
     try {
+      print(url);
+      print(json);
       final http.Response response =
           await http.post(Uri.parse(url), headers: headers, body: body);
       if (response.statusCode >= 200 || response.statusCode <= 204) {
@@ -41,7 +43,9 @@ class HttpService {
   static postWithFiles(
       String url, String body, Map<String, String> files) async {
     try {
-
+      print(url);
+      print(body);
+      print(files);
       final request = http.MultipartRequest('POST', Uri.parse(url));
       List<http.MultipartFile> multipartFiles = [];
       for (var entry in files.entries) {
@@ -72,10 +76,9 @@ class HttpService {
     }
   }
 
-   static delete(String url) async {
+  static delete(String url) async {
     try {
-      final http.Response response =
-          await http.delete(Uri.parse(url));
+      final http.Response response = await http.delete(Uri.parse(url));
       if (response.statusCode >= 200 || response.statusCode <= 204) {
         return json.decode(response.body);
       } else {

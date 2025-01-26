@@ -81,7 +81,7 @@ class PurchaseProvider with ChangeNotifier {
     if (currentPurchaseModel != null) {
       for (var subproduct in currentPurchaseModel!.subProducts) {
         if (subproduct.image != "") {
-          images[subproduct.subproduct] = subproduct.image;
+          images[subproduct.subproduct] = subproduct.image ?? '';
         }
       }
     }
@@ -112,11 +112,10 @@ class PurchaseProvider with ChangeNotifier {
     final response =
         await HttpService.delete('${getEndPoint('deletePurchase')}/' + id);
     print(response);
-    if (response!=null ) {
-         purchase.removeWhere((element) => element.id ==  id);
-         notifyListeners();
+    if (response != null) {
+      purchase.removeWhere((element) => element.id == id);
+      notifyListeners();
     }
-    
   }
 
   fetchSubProductPurchases({required String id}) async {

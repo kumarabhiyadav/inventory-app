@@ -34,7 +34,7 @@ _$PurchaseSubProductImpl _$$PurchaseSubProductImplFromJson(
     _$PurchaseSubProductImpl(
       id: json['_id'] as String,
       cost: (json['cost'] as num).toDouble(),
-      image: json['image'] as String,
+      image: json['image'] as String?,
       subproduct: json['subproduct'] as String,
       name: json['name'] as String,
       unit: json['unit'] as String,

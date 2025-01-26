@@ -39,7 +39,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(
-                      width: dW*0.6,
+                      width: dW * 0.6,
                       child: Text(
                         widget.purchaseModel.supplier.name,
                         style: Theme.of(context).textTheme.bodyLarge,
@@ -161,17 +161,19 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: dW*.6,
+                                      width: dW * .6,
                                       child: Text(
                                         sub.name,
-                                        style:
-                                            Theme.of(context).textTheme.bodyMedium,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
                                       ),
                                     ),
                                     Text(
                                       sub.unit,
-                                      style:
-                                          Theme.of(context).textTheme.labelSmall,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
                                     ),
                                   ],
                                 ),
@@ -197,18 +199,22 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                                     builder: (context) =>
                                                         ShowImage(
                                                             title: sub.name,
-                                                            url: sub.image )));
+                                                            url: sub.image ??
+                                                                '')));
                                           },
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8),
-                                            child: Image.network(
-                                              // sub.image,
-                                              sub.image,
-                                              height: 40,
-                                              width: 40,
-                                              fit: BoxFit.fill,
-                                            ),
+                                            child: sub.image == null
+                                                ? const Icon(
+                                                    Icons.image_not_supported)
+                                                : Image.network(
+                                                    // sub.image,
+                                                    sub.image ?? '',
+                                                    height: 40,
+                                                    width: 40,
+                                                    fit: BoxFit.fill,
+                                                  ),
                                           ),
                                         ),
                                 ),
@@ -248,7 +254,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                 ),
                               ],
                             ),
-                            Divider(),
+                            const Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -260,14 +266,14 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                   ],
                                 ),
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text('MRP %'),
-                                   Text((calculatePercentageDifference(
-                                            sub.cost, sub.mrp))
-                                        .toStringAsFixed(2))]
-
-                                ),
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text('MRP %'),
+                                      Text((calculatePercentageDifference(
+                                              sub.cost, sub.mrp))
+                                          .toStringAsFixed(2))
+                                    ]),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

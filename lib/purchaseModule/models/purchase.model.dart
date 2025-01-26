@@ -1,5 +1,3 @@
-
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'supplier.model.dart';
 part 'purchase.model.freezed.dart';
@@ -8,33 +6,30 @@ part 'purchase.model.g.dart';
 @freezed
 class PurchaseModel with _$PurchaseModel {
   const factory PurchaseModel({
-  @JsonKey(name: '_id') required final String id,
-  required final double totalCost,
-  required final double additionalCost,
-  required final List<PurchaseSubProduct> subProducts, 
-  required final DateTime purchaseDate,
-  @JsonKey(name: 'supplier') required SupplierModel supplier,
+    @JsonKey(name: '_id') required final String id,
+    required final double totalCost,
+    required final double additionalCost,
+    required final List<PurchaseSubProduct> subProducts,
+    required final DateTime purchaseDate,
+    @JsonKey(name: 'supplier') required SupplierModel supplier,
   }) = _PurchaseModel;
 
   factory PurchaseModel.fromJson(Map<String, dynamic> json) =>
       _$PurchaseModelFromJson(json);
 }
 
-
 @freezed
 class PurchaseSubProduct with _$PurchaseSubProduct {
   const factory PurchaseSubProduct({
-  @JsonKey(name: '_id')  required  String id,
-  required  double cost,
-  required  String image,
-  @JsonKey(name: 'subproduct') required String subproduct,
-  @JsonKey(name: 'name') required String name,
-  required  String unit,
-  required  double quantity,  
-  required  double mrp,  
-  required  double sellingprice,  
-
-
+    @JsonKey(name: '_id') required String id,
+    required double cost,
+    required String? image,
+    @JsonKey(name: 'subproduct') required String subproduct,
+    @JsonKey(name: 'name') required String name,
+    required String unit,
+    required double quantity,
+    required double mrp,
+    required double sellingprice,
   }) = _PurchaseSubProduct;
 
   factory PurchaseSubProduct.fromJson(Map<String, dynamic> json) =>

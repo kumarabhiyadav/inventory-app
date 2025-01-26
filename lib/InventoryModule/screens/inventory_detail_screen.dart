@@ -187,7 +187,9 @@ class _InventoryDetailScreenState extends State<InventoryDetailScreen> {
                 SizedBox(
                   height: size.width * 0.1,
                   width: size.width * 0.1,
-                  child: Image.network(widget.subProduct.image),
+                  child: widget.subProduct.image == null
+                      ? const Icon(Icons.image_not_supported_rounded)
+                      : Image.network(widget.subProduct.image!),
                 ),
               ],
             ),

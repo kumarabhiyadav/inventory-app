@@ -27,8 +27,12 @@ mixin _$SupplierModel {
   String get mobile => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
 
+  /// Serializes this SupplierModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SupplierModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SupplierModelCopyWith<SupplierModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +61,8 @@ class _$SupplierModelCopyWithImpl<$Res, $Val extends SupplierModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SupplierModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,6 +121,8 @@ class __$$SupplierModelImplCopyWithImpl<$Res>
       _$SupplierModelImpl _value, $Res Function(_$SupplierModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SupplierModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,12 +200,14 @@ class _$SupplierModelImpl implements _SupplierModel {
                 other.isDeleted == isDeleted));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, name, address, mobile, isDeleted);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SupplierModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SupplierModelImplCopyWith<_$SupplierModelImpl> get copyWith =>
@@ -233,8 +243,11 @@ abstract class _SupplierModel implements SupplierModel {
   String get mobile;
   @override
   bool get isDeleted;
+
+  /// Create a copy of SupplierModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SupplierModelImplCopyWith<_$SupplierModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

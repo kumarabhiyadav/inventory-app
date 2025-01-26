@@ -81,7 +81,7 @@ class _ShowAddPurchaseProductsState extends State<ShowAddPurchaseProducts> {
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
                                         child: Image.file(
-                                          File(e.image),
+                                          File(e.image ?? ''),
                                           fit: BoxFit.fill,
                                         ))
                                     : const Icon(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/InventoryModule/screens/category_screen.dart';
 import 'package:inventory_app/InventoryModule/screens/inventory_history.screen.dart';
+import 'package:inventory_app/api.dart';
 
 import 'package:inventory_app/commonWidgets/app_bar.dart';
 import 'package:inventory_app/financeModule/screens/report_screen.dart';
@@ -12,6 +13,7 @@ import 'package:inventory_app/screens/qr_mobile.screen.dart';
 import 'package:inventory_app/screens/qr_scanner.screen.dart';
 import 'package:provider/provider.dart';
 import '../commonWidgets/options.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,6 +23,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  myInit() async {
+    final response = await http.get(Uri.parse(domain)); // For server up
+    // print(response);
+  }
+
+  @override
+  void initState() {
+    myInit();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

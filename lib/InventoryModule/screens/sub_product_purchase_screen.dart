@@ -108,7 +108,8 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
                       SizedBox(
                           height: dW * 0.1,
                           width: dW * 0.1,
-                          child: subproductPurchase[index]['image'] != null
+                          child: subproductPurchase[index]['image'] == null ||
+                                  subproductPurchase[index]['image'] == ''
                               ? const Icon(Icons.image_not_supported_rounded)
                               : GestureDetector(
                                   onTap: () {
@@ -142,15 +143,18 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
                           children: [
                             const Text('MRP %'),
                             Text((calculatePercentageDifference(
-                                    subproductPurchase[index]['cost'].toDouble(),
-                                    subproductPurchase[index]['mrp'].toDouble()))
+                                    subproductPurchase[index]['cost']
+                                        .toDouble(),
+                                    subproductPurchase[index]['mrp']
+                                        .toDouble()))
                                 .toStringAsFixed(2))
                           ]),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Selling Price'),
-                          Text((subproductPurchase[index]['sellingprice'].toDouble())
+                          Text((subproductPurchase[index]['sellingprice']
+                                  .toDouble())
                               .toStringAsFixed(2)),
                         ],
                       ),
@@ -160,7 +164,8 @@ class _SubProductPurchaseState extends State<SubProductPurchase> {
                           const Text('Selling %'),
                           Text((calculatePercentageDifference(
                                   subproductPurchase[index]['cost'].toDouble(),
-                                  subproductPurchase[index]['sellingprice'].toDouble()))
+                                  subproductPurchase[index]['sellingprice']
+                                      .toDouble()))
                               .toStringAsFixed(2)),
                         ],
                       ),

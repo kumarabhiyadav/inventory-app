@@ -30,8 +30,12 @@ mixin _$PurchaseModel {
   @JsonKey(name: 'supplier')
   SupplierModel get supplier => throw _privateConstructorUsedError;
 
+  /// Serializes this PurchaseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PurchaseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PurchaseModelCopyWith<PurchaseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PurchaseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +107,8 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
     ) as $Val);
   }
 
+  /// Create a copy of PurchaseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SupplierModelCopyWith<$Res> get supplier {
@@ -138,6 +146,8 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
       _$PurchaseModelImpl _value, $Res Function(_$PurchaseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PurchaseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -236,7 +246,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
                 other.supplier == supplier));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -247,7 +257,9 @@ class _$PurchaseModelImpl implements _PurchaseModel {
       purchaseDate,
       supplier);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PurchaseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PurchaseModelImplCopyWith<_$PurchaseModelImpl> get copyWith =>
@@ -288,8 +300,11 @@ abstract class _PurchaseModel implements PurchaseModel {
   @override
   @JsonKey(name: 'supplier')
   SupplierModel get supplier;
+
+  /// Create a copy of PurchaseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PurchaseModelImplCopyWith<_$PurchaseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -303,7 +318,7 @@ mixin _$PurchaseSubProduct {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   double get cost => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'subproduct')
   String get subproduct => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -313,8 +328,12 @@ mixin _$PurchaseSubProduct {
   double get mrp => throw _privateConstructorUsedError;
   double get sellingprice => throw _privateConstructorUsedError;
 
+  /// Serializes this PurchaseSubProduct to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PurchaseSubProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PurchaseSubProductCopyWith<PurchaseSubProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -328,7 +347,7 @@ abstract class $PurchaseSubProductCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: '_id') String id,
       double cost,
-      String image,
+      String? image,
       @JsonKey(name: 'subproduct') String subproduct,
       @JsonKey(name: 'name') String name,
       String unit,
@@ -347,12 +366,14 @@ class _$PurchaseSubProductCopyWithImpl<$Res, $Val extends PurchaseSubProduct>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PurchaseSubProduct
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? cost = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? subproduct = null,
     Object? name = null,
     Object? unit = null,
@@ -369,10 +390,10 @@ class _$PurchaseSubProductCopyWithImpl<$Res, $Val extends PurchaseSubProduct>
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       subproduct: null == subproduct
           ? _value.subproduct
           : subproduct // ignore: cast_nullable_to_non_nullable
@@ -412,7 +433,7 @@ abstract class _$$PurchaseSubProductImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: '_id') String id,
       double cost,
-      String image,
+      String? image,
       @JsonKey(name: 'subproduct') String subproduct,
       @JsonKey(name: 'name') String name,
       String unit,
@@ -429,12 +450,14 @@ class __$$PurchaseSubProductImplCopyWithImpl<$Res>
       $Res Function(_$PurchaseSubProductImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PurchaseSubProduct
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? cost = null,
-    Object? image = null,
+    Object? image = freezed,
     Object? subproduct = null,
     Object? name = null,
     Object? unit = null,
@@ -451,10 +474,10 @@ class __$$PurchaseSubProductImplCopyWithImpl<$Res>
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       subproduct: null == subproduct
           ? _value.subproduct
           : subproduct // ignore: cast_nullable_to_non_nullable
@@ -506,7 +529,7 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
   @override
   final double cost;
   @override
-  final String image;
+  final String? image;
   @override
   @JsonKey(name: 'subproduct')
   final String subproduct;
@@ -546,12 +569,14 @@ class _$PurchaseSubProductImpl implements _PurchaseSubProduct {
                 other.sellingprice == sellingprice));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, cost, image, subproduct,
       name, unit, quantity, mrp, sellingprice);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PurchaseSubProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PurchaseSubProductImplCopyWith<_$PurchaseSubProductImpl> get copyWith =>
@@ -570,7 +595,7 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
   const factory _PurchaseSubProduct(
       {@JsonKey(name: '_id') required final String id,
       required final double cost,
-      required final String image,
+      required final String? image,
       @JsonKey(name: 'subproduct') required final String subproduct,
       @JsonKey(name: 'name') required final String name,
       required final String unit,
@@ -587,7 +612,7 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
   @override
   double get cost;
   @override
-  String get image;
+  String? get image;
   @override
   @JsonKey(name: 'subproduct')
   String get subproduct;
@@ -602,8 +627,11 @@ abstract class _PurchaseSubProduct implements PurchaseSubProduct {
   double get mrp;
   @override
   double get sellingprice;
+
+  /// Create a copy of PurchaseSubProduct
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PurchaseSubProductImplCopyWith<_$PurchaseSubProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
