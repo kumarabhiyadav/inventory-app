@@ -71,7 +71,7 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
 
       if (cost != null && sales != null) {
         // return mrp <= calculateNumberWithPercentage(cost, sales);
-        return mrp <= double.parse(_salesController.text);
+        return sales <= mrp;
       }
     }
 
