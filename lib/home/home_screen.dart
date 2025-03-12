@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const MobielScannerScreen()));
+                        builder: (context) => const FastQRScannerScreen()));
               },
               size: size,
               icon: 'assets/svgs/quick_product.svg',

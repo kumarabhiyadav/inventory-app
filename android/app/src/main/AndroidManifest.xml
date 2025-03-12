@@ -1,4 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Permission to access the Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Permission to use the camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    
+    <!-- Permission to control the flashlight -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <application
         android:label="inventory_app"
         android:name="${applicationName}"
