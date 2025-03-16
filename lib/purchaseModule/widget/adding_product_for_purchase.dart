@@ -57,8 +57,6 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
     });
   }
 
- 
-
   bool checkPercentageOfMRPandSells() {
     if (_mrpController.text.isEmpty) {
       return false;
@@ -205,8 +203,7 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
             TextFormField(
               controller: _salesController,
               onChanged: ((value) {
-        
-                 if (value.isEmpty) {
+                if (value.isEmpty) {
                   setState(() {
                     sellingMessage = "";
                   });
@@ -260,7 +257,7 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
             ),
             PrimaryButton(
                 function: () {
-                  if (!checkPercentageOfMRPandSells()) {
+                  if (checkPercentageOfMRPandSells()) {
                     Provider.of<PurchaseProvider>(context, listen: false)
                         .addSubProductForPurchase(PurchaseSubProduct(
                             id: "",
@@ -269,12 +266,14 @@ class _AddProductForPurchaseState extends State<AddProductForPurchase> {
                             subproduct: widget.subProductModel.id,
                             name: widget.subProductModel.name,
                             unit: selectedUnit,
-                            mrp: _mrpController.text.isEmpty?0.0:double.parse(_mrpController.text),
-                            sellingprice: _salesController.text.isEmpty?0.0:double.parse(_salesController.text),
-
-                            
+                            mrp: _mrpController.text.isEmpty
+                                ? 0.0
+                                : double.parse(_mrpController.text),
+                            sellingprice: _salesController.text.isEmpty
+                                ? 0.0
+                                : double.parse(_salesController.text),
                             quantity: double.parse(_quantityController.text)));
-        
+
                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>ShowAddPurchaseProducts(supplierModel: Provider.of<PurchaseProvider>(context,listen: false).currentPurchaseModel!.supplier)));
                     Navigator.pushAndRemoveUntil(
                         context,
