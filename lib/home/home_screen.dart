@@ -22,17 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  myInit() async {
-    final response = await http.get(Uri.parse(domain)); // For server up
-    // print(response);
-  }
-
-  @override
-  void initState() {
-    myInit();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
