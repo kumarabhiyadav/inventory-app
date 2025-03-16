@@ -10,7 +10,6 @@ import 'package:inventory_app/purchaseModule/providers/purchase_provider.dart';
 import 'package:inventory_app/purchaseModule/screens/purchase_screen.dart';
 import 'package:inventory_app/purchaseModule/screens/supplier_screen.dart';
 import 'package:inventory_app/screens/qr_mobile.screen.dart';
-import 'package:inventory_app/screens/qr_scanner.screen.dart';
 import 'package:provider/provider.dart';
 import '../commonWidgets/options.dart';
 import 'package:http/http.dart' as http;
