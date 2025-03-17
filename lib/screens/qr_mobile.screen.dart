@@ -138,8 +138,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
               builder: (context) => InventoryDetailScreen(
                     subProduct: subProduct,
                     inStock: result['inStock'],
-                    code: code.split(':')[0],
-                    pass: code.split(':')[1],
+                    id: code,
                     logs: result['log'],
                   )));
       return;

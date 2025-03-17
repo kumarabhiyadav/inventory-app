@@ -118,9 +118,9 @@ class InventoryProvider with ChangeNotifier {
     return result;
   }
 
-  sellByQrCode(code, pass, qyt, cost, note) async {
+  sellByQrCode(id, qyt, cost, note) async {
     final result = await HttpService.getRequest(getEndPointWithQuery(
-        name: 'sellProductQR', query: '/$code/$pass/$qyt/$cost/$note'));
+        name: 'sellProductQR', query: '/$id/$qyt/$cost/$note'));
     print(result);
     return result;
   }

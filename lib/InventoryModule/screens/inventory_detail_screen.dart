@@ -15,13 +15,11 @@ class InventoryDetailScreen extends StatefulWidget {
       {super.key,
       required this.subProduct,
       required this.inStock,
-      required this.code,
-      required this.pass,
+      required this.id,
       required this.logs});
   final PurchaseSubProduct subProduct;
   final num inStock;
-  final String code;
-  final String pass;
+  final String id;
   final List<dynamic> logs;
 
   @override
@@ -50,8 +48,7 @@ class _InventoryDetailScreenState extends State<InventoryDetailScreen> {
       final result =
           await Provider.of<InventoryProvider>(context, listen: false)
               .sellByQrCode(
-                  widget.code,
-                  widget.pass,
+                  widget.id,
                   _quantityController.text,
                   _costController.text,
                   _noteController.text == "" ? "NULL" : _noteController.text);
