@@ -62,8 +62,8 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
   void _toggleFlash() async {
     if (_cameraController != null) {
       _isFlashOn = !_isFlashOn;
-      await _cameraController!.setFlashMode(
-          _isFlashOn ? FlashMode.torch : FlashMode.off);
+      await _cameraController!
+          .setFlashMode(_isFlashOn ? FlashMode.torch : FlashMode.off);
       setState(() {});
     }
   }
@@ -118,12 +118,12 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
   }
 
   void _handleScannedCode(String code) async {
-    if (code.split(':').length != 2) {
+    if (code == '') {
       showToast(message: "Invalid QR code");
       return;
     }
     final result = await Provider.of<InventoryProvider>(context, listen: false)
-        .getProductByQRcode(code.split(':')[0], code.split(':')[1]);
+        .getProductByQRcode(code);
 
     if (result == null) {
       showToast(message: "Product Not Found In Inventory");
@@ -149,7 +149,8 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
 
   @override
   void dispose() {
-    if (_cameraController != null && _cameraController!.value.isStreamingImages) {
+    if (_cameraController != null &&
+        _cameraController!.value.isStreamingImages) {
       _cameraController!.stopImageStream();
     }
     _cameraController?.dispose();
