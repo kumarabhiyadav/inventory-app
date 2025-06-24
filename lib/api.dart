@@ -1,4 +1,4 @@
-const domain = "http://65.20.69.134:6001";
+const domain = "http://34.47.226.155:6001";
 // const domain = "http://127.0.0.1:6001";
 
 // const domain = "https://inventory-api-khnq.onrender.com";
